@@ -1,7 +1,7 @@
 var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(8000);
+var ecstatic = require('ecstatic')(__dirname+'/bookmarklet');
 
-console.log('Server running at http://0.0.0.0:8000/');
+http.createServer(ecstatic).listen(3000);
+
+console.log(__dirname);
+console.log('Listening on: http://localhost:3000');
