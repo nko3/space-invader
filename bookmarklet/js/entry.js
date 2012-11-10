@@ -1,2 +1,2 @@
-var test = require('./test')
-test();
+var duckpuncher = require('./duckpuncher');
+duckpuncher.duckpunch();
