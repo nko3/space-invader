@@ -23,7 +23,7 @@ navigator.webkitGetUserMedia({audio: true}, function(stream) {
     sound.loop = true;
     
     sound.connect(scriptProcessor);
-    sound.connect(context.destination);
+    scriptProcessor.connect(context.destination);
     sound.start(0);
   };
 
@@ -33,10 +33,12 @@ navigator.webkitGetUserMedia({audio: true}, function(stream) {
   // scriptProcessor.connect(context.destination);
   // context.startRendering();
   function onaudioprocess(event){
-    for (var i = 0; i < 2; i++) {
-      var data = event.outputBuffer.getChannelData(i);
-      audioData.push(data);
+    var input = event.inputBuffer.getChannelData(0);
+    var output = event.outputBuffer.getChannelData(0);
+    for (var i = 0; i < output.length; i++) {
+      output[i] = input[i];
     }
+    //audioData.push(data);
   }
 }, onError);
 
