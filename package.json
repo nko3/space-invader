@@ -4,13 +4,17 @@
   "description": "👾",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js -w --debug",
+    "build-bookmarklet": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:nko3/space-invader.git"
   },
   "dependencies": {
+    "ecstatic": "~0.1.6",
+    "browserify": "~1.16.3"
   },
   "engines": {
     "node": "0.8.x"
