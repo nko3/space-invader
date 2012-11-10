@@ -9,7 +9,7 @@ navigator.webkitGetUserMedia({audio: true}, function(stream) {
   var microphone = context.createMediaStreamSource(stream);
   var scriptProcessor = context.createScriptProcessor(2048);
   scriptProcessor.onaudioprocess = onaudioprocess;
-  console.log(scriptProcessor);
+  
 
   var hello = 'http://thelab.thingsinjars.com/web-audio-tutorial/hello.mp3';
   var request = new XMLHttpRequest();
@@ -22,23 +22,20 @@ navigator.webkitGetUserMedia({audio: true}, function(stream) {
     sound.buffer = context.createBuffer(audio, true);
     sound.loop = true;
     
-    sound.connect(scriptProcessor);
-    scriptProcessor.connect(context.destination);
+    //sound.connect(scriptProcessor);
+    //scriptProcessor.connect(context.destination);
     sound.start(0);
   };
 
-  request.send();
-
-  // microphone.connect(scriptProcessor);
-  // scriptProcessor.connect(context.destination);
-  // context.startRendering();
+  microphone.connect(scriptProcessor);
+  scriptProcessor.connect(context.destination);
   function onaudioprocess(event){
-    var input = event.inputBuffer.getChannelData(0);
+    var input = event.inputBuffer.getChannelData(1);
     var output = event.outputBuffer.getChannelData(0);
     for (var i = 0; i < output.length; i++) {
       output[i] = input[i];
     }
-    //audioData.push(data);
+    audioData.push(input);
   }
 }, onError);
 
