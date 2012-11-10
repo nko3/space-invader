@@ -6,32 +6,18 @@ function onError(err) {
 var context = new window.webkitAudioContext();
 
 navigator.webkitGetUserMedia({audio: true}, function(stream) {
-  var microphone = context.createMediaStreamSource(stream);
-  var scriptProcessor = context.createScriptProcessor(2048);
-  scriptProcessor.onaudioprocess = onaudioprocess;
+
+  var microphone                 =  context.createMediaStreamSource(stream);
+  var scriptProcessor            =  context.createScriptProcessor(2048);
+  scriptProcessor.onaudioprocess =  onaudioprocess;
   
-
-  var hello = 'http://thelab.thingsinjars.com/web-audio-tutorial/hello.mp3';
-  var request = new XMLHttpRequest();
-  request.open("GET", hello, true);
-  request.responseType = "arraybuffer";
-
-  request.onload = function() {
-    var audio = request.response;
-    var sound = context.createBufferSource();
-    sound.buffer = context.createBuffer(audio, true);
-    sound.loop = true;
-    
-    //sound.connect(scriptProcessor);
-    //scriptProcessor.connect(context.destination);
-    sound.start(0);
-  };
-
   microphone.connect(scriptProcessor);
   scriptProcessor.connect(context.destination);
+
   function onaudioprocess(event){
-    var input = event.inputBuffer.getChannelData(1);
-    var output = event.outputBuffer.getChannelData(0);
+    var input  =  event.inputBuffer.getChannelData(0);
+    var output =  event.outputBuffer.getChannelData(0);
+
     for (var i = 0; i < output.length; i++) {
       output[i] = input[i];
     }
