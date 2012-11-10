@@ -1,21 +1,13 @@
-function onError(err) {
-  console.dir(err);
-}
-
 var context = new window.webkitAudioContext();
 
-module.exports = function create(microphone, ondata) {
+module.exports = function create(stream, ondata) {
 
   function onaudioprocess(event) {
     var input  =  event.inputBuffer.getChannelData(0);
-    // var output =  event.outputBuffer.getChannelData(0);
-
-    for (var i = 0; i < output.length; i++) {
-      output[i] = input[i];
-    }
     ondata(input);
   }
 
+  var microphone                 =  context.createMediaStreamSource(stream);
   var scriptProcessor            =  context.createScriptProcessor(2048);
   scriptProcessor.onaudioprocess =  onaudioprocess;
   
