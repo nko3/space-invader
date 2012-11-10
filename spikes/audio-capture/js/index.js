@@ -14,7 +14,19 @@ navigator.webkitGetUserMedia({audio: true}, function(stream) {
   scriptProcessor.connect(context.destination);
   context.startRendering();
   function onaudioprocess(event){
-    var data = event.outputBuffer.getChannelData(0)
-    audioData.push(data);
+    for (var i = 0; i < 2; i++) {
+      var data = event.outputBuffer.getChannelData(i);
+      audioData.push(data);
+    }
   }
 }, onError);
+
+
+setInterval(function () {
+  var sum = 0;
+    audioData.forEach(
+      function (arr) {
+        Array.prototype.forEach.call(arr, function (x) { sum += x; });
+      });
+  console.log(sum);
+}, 1000);
