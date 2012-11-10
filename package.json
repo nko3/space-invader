@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "watch": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js -w --debug",
-    "build-bookmarklet": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js"
+    "build-bookmarklet": "browserify --debug -e bookmarklet/js/entry.js -o bookmarklet/js/output.js"
   },
   "repository": {
     "type": "git",
