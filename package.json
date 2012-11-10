@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "watch": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js -w",
+    "watch": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js -w --debug",
     "build-bookmarklet": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js"
   },
   "repository": {
