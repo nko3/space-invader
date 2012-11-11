@@ -5,10 +5,6 @@ var ctrlKeyIsDown = require('./ctrl-key-is-down');
 var updatePositionAndDirection = require('./update-position-and-direction');
 var socket = require('./socket');
 
-module.exports = {
-    speakFromMp3URL: _.debounce(speakFromMp3URL, 500)
-};
-
 function onError(err) {
   throw err;
 }
