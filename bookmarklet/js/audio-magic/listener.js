@@ -29,4 +29,8 @@ Listener.prototype.setDirection = function (direction) {
   );
 };
 
+Listener.prototype.setVelocity = function (x, y) {
+  this._context.listener.setVelocity(x, y, 0);
+};
+
 module.exports = Listener;

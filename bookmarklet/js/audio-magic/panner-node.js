@@ -21,4 +21,8 @@ PannerNode.prototype.setOrientation = function (angle) {
   );
 };
 
+PannerNode.prototype.setVelocity = function(x, y) {
+  this._rawNode.setVelocity(x, y, 0);
+};
+
 module.exports = PannerNode;
