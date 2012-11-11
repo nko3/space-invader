@@ -35,7 +35,7 @@ SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest) {
   }
 
   this._rawNode = this._context.createBufferSource();
-  this._rawNode.buffer = this._context.createBuffer(arrayBuffer, true);
+  this._rawNode.buffer = arrayBuffer;
 
   this._rawNode.connect(dest);
   this._rawNode.noteOn(0);
