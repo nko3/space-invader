@@ -6,6 +6,8 @@ nko.Vector.prototype.normalize = function () {
 };
 
 function init (nko) {
+  nko.me.div.css('cursor', 'pointer');
+
   nko.Dude.prototype.goTo = function (pos, duration, callback) {
     var speed = this.speed || DEFAULT_SPEED;
 
