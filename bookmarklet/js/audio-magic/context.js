@@ -35,8 +35,8 @@ Context.prototype.createAudioBufferFromURL = function (url, cb) {
       function (audioBuffer) {
         cb(null, audioBuffer);
       },
-      function (err) {
-        cb(err, null);
+      function () {
+        cb(new Error('Couldn\'t load sound'), null);
       }
     );
   }.bind(this);

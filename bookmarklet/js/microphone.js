@@ -3,6 +3,7 @@
 var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
 var positioner = require('./update-position-and-direction');
+var config = require('./config');
 var socket = require('./socket');
 var context = require('./context');
 
@@ -83,4 +84,35 @@ exports.playMP3FromDude = function playMP3FromDude(url, dude) {
       ds.tts.playAudioBuffer(buffer);
     }
   });
+};
+
+var carSoundAudioBuffer = null;
+context.createAudioBufferFromURL(config.path + 'sounds/car.wav', function (err, audioBuffer_) {
+  if (err) {
+    throw err;
+  }
+
+  carSoundAudioBuffer = audioBuffer_;
+});
+
+exports.playCarSoundForDude = function (dude) {
+  if (!carSoundAudioBuffer) {
+    return;
+  }
+
+  if (!dudeSounds[dude.id]) {
+    dudeSounds[dude.id] = {};
+  }
+
+  var ds = dudeSounds[dude.id];
+  ds.car = context.createPanningSound();
+
+  ds.car.playAudioBuffer(carSoundAudioBuffer, { loop: true });
+};
+
+exports.stopCarSoundForDude = function (dude) {
+  var ds = dudeSounds[dude.id];
+  if (ds && ds.car) {
+    ds.car.stopPlaying();
+  }
 };

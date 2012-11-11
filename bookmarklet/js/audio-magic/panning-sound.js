@@ -18,6 +18,10 @@ PanningSound.prototype.playAudioBuffer = function (audioBuffer, options) {
   this._soundNode.playAudioBuffer(audioBuffer, this._pannerNode._rawNode, options);
 };
 
+PanningSound.prototype.stopPlaying = function () {
+  this._soundNode.stopPlaying();
+};
+
 PanningSound.prototype.setPosition = function (x, y) {
   this._pannerNode.setPosition(x, y);
 };
