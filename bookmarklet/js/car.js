@@ -1,6 +1,6 @@
 var $car;
 
-function initCar(me) {
+function init(me) {
   var $div = me.div;
 
   var mtop = me.size.y - 25 + 40;
@@ -17,7 +17,6 @@ function initCar(me) {
     });
 
   $car.appendTo($div);
-  console.log($div[0]);
   console.log('inited car');
 }
 
@@ -27,6 +26,6 @@ function toggleCar() {
 }
 
 module.exports = {
-  initCar : initCar,
+  init : init,
   toggleCar: toggleCar
 }

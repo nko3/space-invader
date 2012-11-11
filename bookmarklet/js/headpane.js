@@ -1,7 +1,4 @@
 'use strict';
-var dudeOverrides = require('./dude-overrides');
-var car = require('./car');
-
 var $pane = $('<ul>').addClass('dude-pane');
 
 $pane
@@ -16,8 +13,7 @@ $pane
     fontSize   :  '8px'
   });
 
-function initPane() {
-  var me = nko.me;
+function init(me) {
   me.div.on('click', function (event) {
     $pane.toggle();
     return false;
@@ -25,12 +21,6 @@ function initPane() {
 
   $pane.appendTo(me.div);
 }
-
-setTimeout(function () {
-  initPane();
-  dudeOverrides.init(nko);
-  car.initCar(nko.me);
-}, 200);
 
 function register(item, onselected) {
   var $li = $('<li>' + item + '</li>');
@@ -41,5 +31,6 @@ function register(item, onselected) {
 }
 
 module.exports = {
+  init: init,
   register: register
 }

@@ -48,6 +48,9 @@ function init (nko) {
         }
       });
   };
+
+  nko.Dude.prototype.showCar = function () {}
+  nko.Dude.prototype.hideCar = function () {}
 }
 
 module.exports = {
