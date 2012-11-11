@@ -1,6 +1,8 @@
 var DEFAULT_SPEED = 200;
 var car = require('./car');
 var broadcast = require('./broadcast');
+var playMP3FromDude = require('./play-mp3');
+var context = require('../context');
 var config = require('../config');
 
 nko.Vector.prototype.normalize = function () {
@@ -101,10 +103,10 @@ function init (nko) {
           var microphone = require('../microphone');
           var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
           var localURL = config.path + 'mp3?url='+encodeURIComponent(originalURL);
-          microphone.playMP3FromDude(localURL, this);
+          playMP3FromDude(context, localURL, this);
         }
    }
-  };  
+  };
 }
 
 exports.init = init;

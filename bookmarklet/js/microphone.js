@@ -4,6 +4,7 @@ var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
 var positioner = require('./update-position-and-direction');
 var socket = require('./socket');
+var context = require('./context');
 
 function onError(err) {
   throw err;
@@ -38,10 +39,6 @@ socket.on('welcome', function () {
   }
 });
 
-var Context = require('./audio-magic/context');
-
-var context = new Context();
-
 var dudePanningSounds = {};
 
 // Receiving data
@@ -71,23 +68,12 @@ setInterval(function () {
     return;
   }
 
-  positioner.updatePositionAndDirection(context.listener, nko.me);
-}, 100);
+  positioner.updatePositionAndDirections([context.listener], nko.me);
 
-module.exports = {
-  playMP3FromDude:playMP3FromDude
-};
+  Object.keys(nko.dudes).forEach(function (id) {
+    var dude = nko.dudes[id];
+    var soundsForDude = dudePanningSounds[id];
 
-function playMP3FromDude(url, dude){
-  context.createArrayBufferFromURL(url, function(err, buffer){
-    if (err) {
-      throw err;
-    } 
-    else {
-      //TODO don't overwrite the existing sound, but create array of sounds
-      var dps = dudePanningSounds[data.id] = context.createPanningSound();
-      dps.playArrayBuffer(buffer);
-      positioner.updatePositionAndDirections(dudePanningSounds, dude)
-    }
+    positioner.updatePositionAndDirections(soundsForDude, dude);
   });
-}
+}, 100);
