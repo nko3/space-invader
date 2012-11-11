@@ -1,7 +1,7 @@
 var socket = require('../socket');
 
-function exec(method, arguments) {
-  var data = { method: method, arguments: arguments };
+function exec(method, opts) {
+  var data = { method: method, opts: opts };
   socket.emit('exec', data);
 }
 

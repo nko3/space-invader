@@ -5,10 +5,12 @@ var car           =  require('./car');
 var broadcast     =  require('./broadcast');
 var socket = require('../socket');
 var me;
+var dudes;
 
 setTimeout(function () {
 
   me = nko.me;
+  dudes = nko.dudes;
   dudeOverrides.init(nko);
 
   headpane.init(me);
@@ -22,7 +24,7 @@ function registerBuyCar() {
   headpane.register('Buy a car', function (event) {
     registerSellCar();
     me.showCar();
-    broadcast.exec('showCar', me.id);
+    broadcast.exec('showCar', { id: me.id });
   });
 }
 
@@ -31,11 +33,15 @@ function registerSellCar() {
   headpane.register('Sell your car', function (event) {
     registerBuyCar();
     me.hideCar();
-    broadcast.exec('hideCar', me.id);
+    broadcast.exec('hideCar', { id: me.id });
   });
 }
 
 socket.on('exec', function (data) {
-  console.log('executing', data.method);
+  var id = data.opts.id;
+  var dude = dudes[id];
+  if (!dude) return;
+
+  dude[data.method]();
 });
 

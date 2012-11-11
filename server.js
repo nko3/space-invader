@@ -32,4 +32,8 @@ io.sockets.on('connection', function (socket) {
     socket.broadcast.emit('sound', data);
     console.log('data from: %s, length: %s', data.dude.id, data.channel0.length);
   });
+  socket.on('exec', function (data) {
+    socket.broadcast.emit('exec', data);
+  });
 });
+
