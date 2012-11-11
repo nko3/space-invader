@@ -15,20 +15,22 @@ function init (nko) {
     console.log('constructing', options);
     OldDude.apply(this, arguments);
     this.speed = options.speed;
+    console.log("options", options);
     this.updateCar(options);
   };
   nko.Dude.prototype = Object.create(OldDude.prototype);
   nko.Dude.prototype.constructor = nko.Dude;
 
-  nko.Dude.prototype.toJSON = function () {
-    var json = OldDude.prototype.toJSON.call(this);
+  // Use `OldDude` so that it works on `nko.me` as well (which is already created).
+  var originalToJSON = OldDude.prototype.toJSON;
+  OldDude.prototype.toJSON = function () {
+    var json = originalToJSON.call(this);
     json.speed = this.speed;
     json.hasCar = this.hasCar;
 
     return json;
   };
 
-  // Use `OldDude` so that it works on `nko.me` as well (which is already created).
   OldDude.prototype.goTo = function (pos, duration, callback) {
     var speed = this.speed || DEFAULT_SPEED;
 
