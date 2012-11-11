@@ -55,7 +55,7 @@ socket.on('sound', function (data) {
   }
 
   var dps = dudePanningSounds[data.id];
-  dps.play(data.length, data.sampleRate, data.channel0);
+  dps.playRawData(data.length, data.sampleRate, data.channel0);
   //console.log(dudePanningSounds);
 
   var dude = nko.dudes[data.id];

@@ -9,9 +9,14 @@ function PanningSound(context) {
   this._soundNode = new SoundNode(context);
 }
 
-PanningSound.prototype.play = function (length, sampleRate, channel0) {
+PanningSound.prototype.playRawData = function (length, sampleRate, channel0) {
   this._pannerNode._rawNode.connect(this._context.destination);
-  this._soundNode.play(length, sampleRate, channel0, this._pannerNode._rawNode);
+  this._soundNode.playRawData(length, sampleRate, channel0, this._pannerNode._rawNode);
+};
+
+PanningSound.prototype.playArrayBuffer = function (arrayBuffer) {
+  this._pannerNode._rawNode.connect(this._context.destination);
+  this._soundNode.playArrayBuffer(arrayBuffer, this._pannerNode._rawNode);
 };
 
 PanningSound.prototype.setPosition = function (x, y) {
