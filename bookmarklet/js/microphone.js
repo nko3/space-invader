@@ -39,30 +39,18 @@ socket.on('welcome', function () {
   }
 });
 
-var dudePanningSounds = {};
+var dudeSounds = Object.create(null);
 
 // Receiving data
 socket.on('sound', function (data) {
-  if (!dudePanningSounds[data.id]) {
-    var panningSound = context.createPanningSound();
-    dudePanningSounds[data.id] = {};
-    dudePanningSounds[data.id].panning = panningSound;
+  if (!dudeSounds[data.dude.id]) {
+    dudeSounds[data.dude.id] = {};
   }
 
-  var dps = dudePanningSounds[data.id];
-  dp.panning.playRawData(data.length, data.sampleRate, data.channel0);
-  //console.log(dudePanningSounds);
-
-  var dude = nko.dudes[data.id];
-  if (!dude || !dps || dude === nko.me) {
-    return;
-  }
-
-  positioner.updatePositionAndDirections(dps, dude);
+  var ds = dudeSounds[data.dude.id];
+  ds.panning = context.createPanningSound();
+  ds.panning.playRawData(data.length, data.sampleRate, data.channel0);
 });
-
-
-// TODO disconnect dps if dude is dead
 
 setInterval(function () {
   if (!nko.me || !nko.me.pos || !nko.me.origin) {
@@ -72,23 +60,27 @@ setInterval(function () {
 
   positioner.updatePositionAndDirection(context.listener, nko.me);
 
+  Object.keys(dudeSounds).forEach(function (id) {
+    var ds = dudeSounds[id];
+    var dude = nko.dudes[id];
+    positioner.updatePositionAndDirections(ds, dude);
+  });
 }, 100);
 
-module.exports = {
-  playMP3FromDude:playMP3FromDude
-};
-
-function playMP3FromDude(url, dude){
-  context.createArrayBufferFromURL(url, function(err, buffer){
+exports.playMP3FromDude = function playMP3FromDude(url, dude) {
+  context.createArrayBufferFromURL(url, function (err, buffer) {
     if (err) {
       throw err;
-    } 
+    }
     else {
-      dudePanningSounds[dude.id] = {};
-      dudePanningSounds[dude.id].tts = context.createPanningSound();
+      if (!dudeSounds[dude.id]) {
+        dudeSounds[dude.id] = {};
+      }
 
-      dudePanningSounds[dude.id].tts.playArrayBuffer(buffer);
-      positioner.updatePositionAndDirections(dudePanningSounds, dude)
+      var ds = dudeSounds[dude.id];
+      ds.tts = context.createPanningSound();
+
+      ds.tts.playArrayBuffer(buffer);
     }
   });
-}
+};

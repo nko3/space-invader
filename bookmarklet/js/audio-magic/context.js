@@ -30,7 +30,7 @@ Context.prototype.createArrayBufferFromURL = function (url, cb) {
 
   // Decode asynchronously
   request.onload = function () {
-    context._audioContext.decodeAudioData(
+    this._audioContext.decodeAudioData(
       request.response,
       function (arrayBuffer) {
         cb(null, arrayBuffer);
@@ -39,9 +39,9 @@ Context.prototype.createArrayBufferFromURL = function (url, cb) {
         cb(err, null);
       }
     );
-  };
+  }.bind(this);
 
   request.send();
-}
+};
 
 module.exports = Context;

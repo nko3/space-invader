@@ -4,22 +4,17 @@ var transformCar = require('./dude/car').transformCar;
 
 var PIXELS_PER_METER = 200;
 
-module.exports = {
-  updatePositionAndDirection:updatePositionAndDirection,
-  updatePositionAndDirections:updatePositionAndDirections
+exports.updatePositionAndDirections = function (sounds, dude) {
+  if (sounds.tts) {
+    exports.updatePositionAndDirection(sounds.tts, dude);
+  }
+
+  if (sounds.panning) {
+    exports.updatePositionAndDirection(sounds.panning, dude);
+  }
 };
 
-function updatePositionAndDirections(sounds, dude) {
-  if(sounds.tts) {
-      updatePositionAndDirection(sounds.tts, dude);
-  }
-
-  if(sounds.panning) {
-      updatePositionAndDirection(sounds.panning, dude); 
-  }
-}
-
-function updatePositionAndDirection(obj, dude) {
+exports.updatePositionAndDirection = function (obj, dude) {
   // Convert to meters (very roughly).
   var x = (dude.pos.x - dude.origin.x) / PIXELS_PER_METER;
   var y = (dude.origin.y - dude.pos.y) / PIXELS_PER_METER;
@@ -27,7 +22,7 @@ function updatePositionAndDirection(obj, dude) {
   var velX = dude.vel ? dude.vel.x / PIXELS_PER_METER : 0;
   var velY = dude.vel ? dude.vel.y / PIXELS_PER_METER : 0;
 
-  var direction = dude.state === "idle" ? "s" : dude.state;
+  var direction = dude.state === 'idle' ? 's' : dude.state;
 
   obj.setPosition(x, y);
   obj.setDirection(direction);

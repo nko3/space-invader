@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var keyIsDown = false;
 $(window).on({
@@ -11,5 +11,5 @@ $(window).on({
 });
 
 module.exports = function () {
-    return keyIsDown;
+  return keyIsDown;
 };
