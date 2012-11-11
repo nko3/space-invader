@@ -1,6 +1,6 @@
 {
   "name": "nko3-space-invader",
-  "version": "0.0.0-1",
+  "version": "0.0.0-6",
   "description": "👾",
   "main": "server.js",
   "scripts": {
