@@ -3,14 +3,18 @@ var $pane = $('<ul>').addClass('dude-pane');
 
 $pane
   .css({
-    marginLeft :  '65px',
-    background :  'antiquewhite',
-    border     :  '2px solid black',
-    padding    :  '2px',
+    position   :  'absolute',
+    top        :  '-10px',
+    left       :  '65px',
+    background :  '#DDD',
+    border     :  '2px solid gray',
+    padding    :  '3px 10px',
     cursor     :  'pointer',
     display    :  'none',
-    width      :  '150px',
-    fontSize   :  '8px'
+    minWidth   :  '100px',
+    fontSize   :  '12px',
+    borderRadius : '5px',
+    boxShadow : '2px 2px 2px gray'
   });
 
 function init(me) {

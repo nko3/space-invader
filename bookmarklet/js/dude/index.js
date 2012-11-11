@@ -19,7 +19,7 @@ setTimeout(function () {
 
 function registerBuyCar() {
   headpane.unregister('sell your car');
-  headpane.register('buy a car', function (event) {
+  headpane.register('Buy a car', function (event) {
     registerSellCar();
     me.showCar();
     broadcast.exec('showCar', me.id);
@@ -28,7 +28,7 @@ function registerBuyCar() {
 
 function registerSellCar() {
   headpane.unregister('buy a car');
-  headpane.register('sell your car', function (event) {
+  headpane.register('Sell your car', function (event) {
     registerBuyCar();
     me.hideCar();
     broadcast.exec('hideCar', me.id);
