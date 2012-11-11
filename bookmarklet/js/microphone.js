@@ -1,15 +1,6 @@
 var microphoneData = require('./microphone-data');
+var ctrlKeyIsDown = require('./ctrl-key-is-down');
 var socket = io.connect('http://' + window.location.hostname + ':3000');
-
-var ctrlKeyIsDown = false;
-$(window).on({
-  'keydown': function (e) {
-    ctrlKeyIsDown = e.ctrlKey;
-  },
-  'keyup': function (e) {
-    ctrlKeyIsDown = e.ctrlKey;
-  }
-});
 
 socket.on('welcome', function (data) {
   console.log('welcome', data);
@@ -25,7 +16,7 @@ socket.on('welcome', function (data) {
   );
 
   function processData(data) {
-    if (ctrlKeyIsDown) {
+    if (ctrlKeyIsDown()) {
       var id = nko.me.id;
       socket.emit('sound', { buffer: data, id: id });
       console.log('sending sound to the server');
