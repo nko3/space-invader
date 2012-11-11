@@ -17,9 +17,9 @@ PanningSound.prototype.play = function (audioData) {
   this._soundNode.playTo(audioData, this._pannerNode._rawNode);
 };
 
-PanningSound.prototype.setPosition = function (pos) {
+PanningSound.prototype.setPosition = function (x, y) {
   this.position = pos;
-  this._pannerNode.setPosition(pos);
+  this._pannerNode.setPosition(x, y);
 };
 
 PanningSound.prototype.setOrientation = function (angle) {

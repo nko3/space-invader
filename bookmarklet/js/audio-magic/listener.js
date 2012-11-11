@@ -9,10 +9,10 @@ function Listener(context) {
   this.angle = null;
 }
 
-Listener.prototype.setPosition = function (pos) {
+Listener.prototype.setPosition = function (x, y) {
   this.position = pos;
 
-  this._context.listener.setPosition(pos[0], pos[1], pos[2]);
+  this._context.listener.setPosition(x, y, 0);
 };
 
 Listener.prototype.setOrientation = function (angle) {

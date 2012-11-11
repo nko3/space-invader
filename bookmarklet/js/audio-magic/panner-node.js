@@ -9,9 +9,9 @@ function PannerNode(context) {
   this._rawNode = context.createPanner();
 }
 
-PannerNode.prototype.setPosition = function (pos) {
+PannerNode.prototype.setPosition = function (x, y) {
   this.position = pos;
-  this._rawNode.setPosition(pos[0], pos[1], pos[2]);
+  this._rawNode.setPosition(x, y, 0);
 };
 
 PannerNode.prototype.setOrientation = function (angle) {
