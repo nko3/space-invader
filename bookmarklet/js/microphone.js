@@ -2,7 +2,7 @@
 
 var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
-var updateListener = require('./update-listener');
+var updatePositionAndDirection = require('./update-position-and-direction');
 var socket = require('./socket');
 
 function onError(err) {
@@ -46,16 +46,23 @@ var dudePanningSounds = {};
 
 // Receiving data
 socket.on('sound', function (data) {
-  ps.play(data.length, data.sampleRate, data.channel0);
-
-  dps = dudePanningSounds[data.id];
-  if (dps) {
-    dps.setPosition(data.pos.x, data.pos.y);
-  } else {
+  if (!dudePanningSounds[data.id]) {
     dudePanningSounds[data.id] = context.createPanningSound();
   }
+
+  var dps = dudePanningSounds[data.id];
+  dps.play(data.length, data.sampleRate, data.channel0);
   //console.log(dudePanningSounds);
+
+  var dude = nko.dudes[data.id];
+  if (!dude || !dps || dude === nko.me) {
+    return;
+  }
+
+  updatePositionAndDirection(dps, dude);
 });
+
+// TODO disconnect dps if dude is dead
 
 setInterval(function () {
   if (!nko.me || !nko.me.pos || !nko.me.origin) {
@@ -63,5 +70,5 @@ setInterval(function () {
     return;
   }
 
-  updateListener(context.listener, nko.me);
+  updatePositionAndDirection(context.listener, nko.me);
 }, 100);
