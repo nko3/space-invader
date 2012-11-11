@@ -4,7 +4,7 @@ function setGotoSpeed (speed_) {
   speed = speed_;
 }
 
-function customizeGoto (nko) {
+function init (nko) {
   nko.Dude.prototype.goTo = function(pos, duration, callback) {
     pos = new nko.Vector(pos).minus(this.origin);
 
@@ -51,6 +51,6 @@ function customizeGoto (nko) {
 }
 
 module.exports = {
-  customizeGoto: customizeGoto,
+  init: init,
   setGotoSpeed: setGotoSpeed
 }

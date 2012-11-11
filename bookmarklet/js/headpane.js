@@ -18,10 +18,7 @@ $pane
 
 function initPane() {
   var me = nko.me;
-  console.log('me', me);
   me.div.on('click', function (event) {
-    console.log('this', this);
-    console.log('event', event);
     $pane.toggle();
     return false;
   });
@@ -31,7 +28,7 @@ function initPane() {
 
 setTimeout(function () {
   initPane();
-  dudeOverrides.customizeGoto(nko);
+  dudeOverrides.init(nko);
   car.initCar(nko.me);
 }, 200);
 
