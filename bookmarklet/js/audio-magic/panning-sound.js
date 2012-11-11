@@ -4,9 +4,6 @@ var PannerNode = require('./panner-node');
 var SoundNode = require('./sound-node');
 
 function PanningSound(context) {
-  this.position = null;
-  this.orientation = null;
-
   this._context = context;
   this._pannerNode = new PannerNode(context);
   this._soundNode = new SoundNode(context);
@@ -18,12 +15,10 @@ PanningSound.prototype.play = function (length, sampleRate, channel0) {
 };
 
 PanningSound.prototype.setPosition = function (x, y) {
-  this.position = pos;
   this._pannerNode.setPosition(x, y);
 };
 
 PanningSound.prototype.setOrientation = function (angle) {
-  this.angle = angle;
   this._pannerNode.setOrientation(angle);
 };
 

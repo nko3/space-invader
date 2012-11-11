@@ -3,24 +3,19 @@
 var angleToVector = require('./helpers').angleToVector;
 
 function PannerNode(context) {
-  this.position = null;
-  this.angle = null;
-
-  this._rawNode = context.createPanner();
+  this._context = context;
+  this._rawNode = this._context.createPanner();
 }
 
 PannerNode.prototype.setPosition = function (x, y) {
-  this.position = pos;
   this._rawNode.setPosition(x, y, 0);
 };
 
 PannerNode.prototype.setOrientation = function (angle) {
   // TODO deduplicate code here and in listener.js.
-  this.angle = angle;
-
   var frontVector = angleToVector(angle);
   var upVector = [0, 0, 1];
-  this.context.listener.setOrientation(
+  this._context.listener.setOrientation(
     frontVector[0], frontVector[1], frontVector[2],
     upVector[0], upVector[1], upVector[2]
   );

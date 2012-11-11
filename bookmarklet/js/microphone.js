@@ -52,10 +52,24 @@ socket.on('sound', function (data) {
 });
 
 setInterval(function () {
+  if (!nko.me || !nko.me.pos || !nko.me.origin) {
+    // LAZY PERSON HAX
+    return;
+  }
+
   var x = nko.me.pos.x - nko.me.origin.x;
-  var y = nko.me.pos.y - nko.me.origin.y;
-  var direction = nko.me.state;
+
+  // y is positive to the north for sound, positive to the south for nko.me.
+  var y = nko.me.origin.y - nko.me.pos.y;
+
+  // Convert to meters (very roughly).
+  x /= 50;
+  y /= 50;
+
+  var direction = nko.me.state === "idle" ? "s" : nko.me.state;
 
   context.listener.setPosition(x, y);
   context.listener.setDirection(direction);
+
+  // TODO velocity!
 }, 100);
