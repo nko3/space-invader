@@ -13,9 +13,11 @@
     "url": "git@github.com:nko3/space-invader.git"
   },
   "dependencies": {
-    "ecstatic": "~0.1.6",
     "browserify": "~1.16.3",
-    "socket.io": "~0.9.11"
+    "socket.io": "~0.9.11",
+    "vows": "~0.6.4",
+    "bookmarkletify": "0.0.1",
+    "jade": ">= 0.0.1"
   },
   "engines": {
     "node": "0.8.x"

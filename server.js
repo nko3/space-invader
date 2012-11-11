@@ -1,9 +1,22 @@
 var port = 3000;
 
-var http     =  require('http');
-var ecstatic =  require('ecstatic')(__dirname+'/bookmarklet');
+var express = require('express');
+var routes = require('./routes');
+var app = express();
+app.configure(function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static('bookmarklet'));
+});
+var server = app.listen(port)
 
-var server = http.createServer(ecstatic).listen(port);
+app.get('/', routes.index);
+
+
+//socket io
 var io = require('socket.io').listen(server);
 io.set('log level', 1);
 
