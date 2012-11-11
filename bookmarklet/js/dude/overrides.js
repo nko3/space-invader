@@ -15,7 +15,6 @@ function init (nko) {
     console.log('constructing', options);
     OldDude.apply(this, arguments);
     this.speed = options.speed;
-    console.log("options", options);
     this.updateCar(options);
   };
   nko.Dude.prototype = Object.create(OldDude.prototype);
