@@ -23,4 +23,25 @@ Context.prototype.createPanningSound = function () {
   return new PanningSound(this._audioContext);
 };
 
+Context.prototype.createArrayBufferFromURL(url, cb) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+
+  // Decode asynchronously
+  request.onload = function () {
+    context._audioContext.decodeAudioData(
+      request.response,
+      function (arrayBuffer) {
+        cb(null, arrayBuffer);
+      },
+      function (err) {
+        cb(err, null);
+      }
+    );
+  };
+
+  request.send();
+}
+
 module.exports = Context;

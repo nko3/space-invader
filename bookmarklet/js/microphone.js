@@ -74,24 +74,3 @@ setInterval(function () {
   updatePositionAndDirection(context.listener, nko.me);
 }, 100);
 
-// Receiving mp3 data
-function arrayBufferFromUrl(url, cb) {
-  var request = new XMLHttpRequest();
-  request.open('GET', url, true);
-  request.responseType = 'arraybuffer';
-
-  // Decode asynchronously
-  request.onload = function () {
-    context._audioContext.decodeAudioData(
-      request.response,
-      function (arrayBuffer) {
-        cb(null, arrayBuffer);
-      },
-      function (err) {
-        cb(err, null);
-      }
-    );
-  };
-
-  request.send();
-}
