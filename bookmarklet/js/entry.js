@@ -39,8 +39,9 @@ $invader.css({
   left: '-10px',
   width: '100px',
   height: '100px',
+  cursor: 'pointer',
   background: 'url(http://' + window.location.hostname + ':3000/img/space-invader.png)'
 });
 
 $invader.appendTo($instr);
-$invader.on('click', function () { $instr.fadeOut(200); })
+$invader.on('click', function () { $instr.fadeOut(200); return false; })
