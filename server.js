@@ -15,6 +15,7 @@ app.configure(function(){
 var server = app.listen(port)
 
 app.get('/', routes.index);
+app.get('/mp3', routes.mp3);
 
 
 //socket io

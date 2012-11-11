@@ -86,6 +86,23 @@ function init (nko) {
       if(this.car.is(':visible')) this.car.fadeOut(200);
     }
   };
+
+  nko.Dude.prototype.speak = function(text) {
+    if (!text)
+      this.bubble.fadeOut();
+    else {
+      this.bubble
+         .text(text)
+         .scrollTop(this.bubble.prop("scrollHeight"))
+         .fadeIn();
+
+        if (true || this === nko.me){
+          var microphone = require('../microphone');
+          var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
+          microphone.speakFromMp3URL('http://localhost:3000/mp3?url='+encodeURIComponent(originalURL));
+        }
+   }
+  };  
 }
 
 exports.init = init;
