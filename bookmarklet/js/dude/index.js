@@ -22,8 +22,8 @@ function registerBuyCar() {
   headpane.unregister('Sell your car');
   headpane.register('Buy a car', function (event) {
     registerSellCar();
-    nko.me.hasCar = true;
-    nko.me.updateCar();
+    nko.me.updateCar({ hasCar: true });
+    broadcast.exec('updateCar', { id: nko.me.id, hasCar: true });
   });
 }
 
@@ -31,8 +31,8 @@ function registerSellCar() {
   headpane.unregister('Buy a car');
   headpane.register('Sell your car', function (event) {
     registerBuyCar();
-    nko.me.hasCar = false;
-    nko.me.updateCar();
+    nko.me.updateCar({ hasCar: false });
+    broadcast.exec('updateCar', { id: nko.me.id, hasCar: false });
   });
 }
 
@@ -41,6 +41,6 @@ socket.on('exec', function (data) {
   var dude = dudes[id];
   if (!dude) return;
 
-  dude[data.method]();
+  dude[data.method](data.opts);
 });
 

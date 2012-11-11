@@ -8,7 +8,7 @@ function giveCar(dude) {
   $car = $('<div>').addClass('dude-car');
   $car
     .css({
-      backgroundImage: 'url(http://' + window.location.hostnadude + ':3000/img/car.png)',
+      backgroundImage: 'url(http://' + window.location.hostname + ':3000/img/car.png)',
       backgroundRepeat: 'none',
       backgroundPosition: 'top',
       width: '128px',

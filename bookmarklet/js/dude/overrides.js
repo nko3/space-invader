@@ -1,5 +1,6 @@
 var DEFAULT_SPEED = 200;
 var car = require('./car');
+var broadcast = require('./broadcast');
 
 nko.Vector.prototype.normalize = function () {
   var length = this.length();
@@ -11,10 +12,10 @@ function init (nko) {
 
   var OldDude = nko.Dude;
   nko.Dude = function (options) {
+    console.log('constructing', options);
     OldDude.apply(this, arguments);
     this.speed = options.speed;
-    this.hasCar = options.hasCar;
-    this.updateCar();
+    this.updateCar(options);
   };
   nko.Dude.prototype = Object.create(OldDude.prototype);
   nko.Dude.prototype.constructor = nko.Dude;
@@ -71,12 +72,14 @@ function init (nko) {
       });
   };
 
-  OldDude.prototype.updateCar = function () {
+  OldDude.prototype.updateCar = function (opts) {
+    this.hasCar = opts.hasCar;
     if (!this.car) car.giveCar(this);
 
     if (this.hasCar) {
-      this.speed = 1000;
+      this.speed = 1500;
       if(!this.car.is(':visible')) this.car.fadeIn(200);
+
     } else {
       this.speed = 200;
       if(this.car.is(':visible')) this.car.fadeOut(200);
