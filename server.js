@@ -12,13 +12,12 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static('bookmarklet'));
 });
-app.listen(port)
+var server = app.listen(port)
 
 app.get('/', routes.index);
 
 
 //socket io
-var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 io.set('log level', 1);
 
