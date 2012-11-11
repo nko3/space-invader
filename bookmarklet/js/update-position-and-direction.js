@@ -1,6 +1,6 @@
 'use strict';
 
-var PIXELS_PER_METER = 50;
+var PIXELS_PER_METER = 200;
 
 module.exports = function updatePositionAndDirection(obj, dude) {
   var x = dude.pos.x - dude.origin.x;
