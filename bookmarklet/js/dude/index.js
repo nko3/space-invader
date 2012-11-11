@@ -20,7 +20,7 @@ function registerBuyCar() {
   headpane.unregister('sell your car');
   headpane.register('buy a car', function (event) {
     registerSellCar();
-    dudeOverrides.setGotoSpeed(1000);
+    me.speed = 1000;
     me.showCar();
     broadcast.exec('showCar', me.id);
   });
@@ -30,7 +30,7 @@ function registerSellCar() {
   headpane.unregister('buy a car');
   headpane.register('sell your car', function (event) {
     registerBuyCar();
-    dudeOverrides.setGotoSpeed(200);
+    me.speed = 200;
     me.hideCar();
     broadcast.exec('hideCar', me.id);
   });

@@ -22,6 +22,10 @@ PanningSound.prototype.setOrientation = function (angle) {
   this._pannerNode.setOrientation(angle);
 };
 
+PanningSound.prototype.setVelocity = function (x, y) {
+  this._pannerNode.setVelocity(x, y);
+};
+
 module.exports = PanningSound;
 
 /*  // RESET panner node; this compensates for a glitch (we think)
