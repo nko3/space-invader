@@ -2,7 +2,6 @@
     "curly": true,
     "eqeqeq": true,
     "immed": true,
-    "latedef": true,
     "newcap": true,
     "noarg": true,
     "nonew": true,
@@ -14,8 +13,9 @@
     "browser": true,
     "quotmark": "single",
     "indent": 2,
-    "predef"        : [
+    "unused": true,
+    "predef": [
         "io",
         "nko"
-    ],
+    ]
 }
