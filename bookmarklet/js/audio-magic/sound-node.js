@@ -42,4 +42,8 @@ SoundNode.prototype.playAudioBuffer = function (audioBuffer, dest, options) {
   this._rawNode.noteOn(0);
 };
 
+SoundNode.prototype.stopPlaying = function () {
+  this._rawNode.noteOff(0);
+};
+
 module.exports = SoundNode;
