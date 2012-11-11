@@ -32,12 +32,3 @@ PanningSound.prototype.setVelocity = function (x, y) {
 };
 
 module.exports = PanningSound;
-
-/*  // RESET panner node; this compensates for a glitch (we think)
-  this._pannerNode._rawNode.disconnect();
-
-  var options = { cone: this.cone, position: this.position };
-  this._pannerNode = new PannerNode(this._context, options);
-
-  this._pannerNode.rawNode.connect(context.destination);
-};*/
