@@ -102,7 +102,8 @@ function init (nko) {
           var microphone = require('../microphone');
           var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
           var localURL = config.path + 'mp3?url='+encodeURIComponent(originalURL);
-          playMP3FromDude(localURL, this);
+          var debounced = _.debounce(playMP3FromDude, 500);
+          debounced(localURL, this);
         }
    }
   };
