@@ -25,7 +25,7 @@ $instr.css({
 instrText = [
   'INSTRUCTIONS:',
   '<ol>',
-  '<li>Press [CTRL] to talk into your microphone</li>',
+  '<li>Hold down [SHIFT] to talk into your microphone</li>',
   '<li>Walk around to hear everyone moving around you</li>',
   '<li>Click on yourself to get a car</li>',
   '<li>Click on me to hide these instructions</li>',
