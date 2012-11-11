@@ -18,11 +18,15 @@ socket.on('welcome', function (data) {
     microphoneData(stream, processData);
   }
 
-  function processData(data) {
+  function processData(audioBuffer) {
     if (ctrlKeyIsDown()) {
       var me = nko.me;
-      var msg = { 
-        buffer: data,
+      console.log(data);
+      var msg = {
+        sampleRate: audioBuffer.sampleRate,
+        length: audioBuffer.length,
+        duration: audioBuffer.duration,
+        channel0: audioBuffer.getChannelData(0),
           dude: {
             id: me.id,
             name: me.name,
