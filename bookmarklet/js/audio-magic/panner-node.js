@@ -15,7 +15,7 @@ PannerNode.prototype.setOrientation = function (angle) {
   // TODO deduplicate code here and in listener.js.
   var frontVector = angleToVector(angle);
   var upVector = [0, 0, 1];
-  this._context.listener.setOrientation(
+  this._rawNode.setOrientation(
     frontVector[0], frontVector[1], frontVector[2],
     upVector[0], upVector[1], upVector[2]
   );
