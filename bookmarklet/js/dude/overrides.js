@@ -1,10 +1,14 @@
 var speed = 200;
+var me;
 
 function setGotoSpeed (speed_) {
-  speed = speed_;
+  me.overrides.speed = speed_;
 }
 
 function init (nko) {
+  me = nko.me;
+  me.overrides = { speed: 200 };
+
   nko.Dude.prototype.goTo = function(pos, duration, callback) {
     pos = new nko.Vector(pos).minus(this.origin);
 
@@ -13,9 +17,8 @@ function init (nko) {
 
     var self = this
       , delta = pos.minus(this.pos)
-      , duration = duration !== undefined && typeof(duration) !== 'function' ? duration : delta.length() / speed * 1000;
+      , duration = duration !== undefined && typeof(duration) !== 'function' ? duration : delta.length() / this.overrides.speed * 1000;
 
-    console.log('speed', speed);
     this.animate(delta.cardinalDirection());
     if (duration && duration > 0)
       this.div.stop();
@@ -39,11 +42,6 @@ function init (nko) {
         },
         complete: function() {
           self.pos = pos;
-          // z-index?
-
-// don't face back south
-//          self.animate('idle');
-
           if (callback) callback();
         }
       });
