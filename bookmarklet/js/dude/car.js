@@ -1,11 +1,11 @@
-var $car;
+'use strict';
 
-function giveCar(dude) {
+exports.giveCar = function (dude) {
   var $div = dude.div;
 
   var carTop = Math.abs(128 - dude.size.y) / 2;
   var carLeft = -1 * Math.abs(128 - dude.size.x) / 2;
-  $car = $('<div>').addClass('dude-car');
+  var $car = $('<div>').addClass('dude-car');
   $car
     .css({
       backgroundImage: 'url(http://' + window.location.hostname + ':3000/img/car.png)',
@@ -21,8 +21,4 @@ function giveCar(dude) {
 
   $car.appendTo($div);
   dude.car = $car;
-}
-
-module.exports = {
-  giveCar : giveCar
 }
