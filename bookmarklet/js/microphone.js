@@ -2,6 +2,7 @@
 
 var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
+var updateListener = require('./update-listener');
 var socket = require('./socket');
 
 function onError(err) {
@@ -62,19 +63,5 @@ setInterval(function () {
     return;
   }
 
-  var x = nko.me.pos.x - nko.me.origin.x;
-
-  // y is positive to the north for sound, positive to the south for nko.me.
-  var y = nko.me.origin.y - nko.me.pos.y;
-
-  // Convert to meters (very roughly).
-  x /= 50;
-  y /= 50;
-
-  var direction = nko.me.state === "idle" ? "s" : nko.me.state;
-
-  context.listener.setPosition(x, y);
-  context.listener.setDirection(direction);
-
-  // TODO velocity!
+  updateListener(context.listener, nko.me);
 }, 100);
