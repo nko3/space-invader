@@ -1,6 +1,7 @@
 var DEFAULT_SPEED = 200;
 var car = require('./car');
 var broadcast = require('./broadcast');
+var config = require('../config');
 
 nko.Vector.prototype.normalize = function () {
   var length = this.length();
@@ -87,7 +88,7 @@ function init (nko) {
     }
   };
 
-  nko.Dude.prototype.speak = function(text) {
+  OldDude.prototype.speak = function(text) {
     if (!text)
       this.bubble.fadeOut();
     else {
@@ -99,7 +100,7 @@ function init (nko) {
         if (true || this === nko.me){
           var microphone = require('../microphone');
           var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
-          microphone.speakFromMp3URL('http://localhost:3000/mp3?url='+encodeURIComponent(originalURL));
+          microphone.speakFromMp3URL(config.path + 'mp3?url='+encodeURIComponent(originalURL));
         }
    }
   };  

@@ -1,3 +1,4 @@
-var socket = io.connect('http://' + window.location.hostname + ':3000');
+var config = require('./config');
+var socket = io.connect(config.path);
 
 module.exports = socket;
