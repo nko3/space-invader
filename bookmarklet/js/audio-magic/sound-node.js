@@ -16,6 +16,10 @@ SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) 
       destFloat32Array[i++] = sourceFloat32Array[i];
   }
 
+  if (this._rawNode) {
+    this._rawNode.disconnect();
+  }
+
   this._rawNode = this._context.createBufferSource();
   this._rawNode.buffer = destAudioBuffer;
 
@@ -26,8 +30,15 @@ SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) 
 SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest) {
   dest = dest || this._context.destination;
 
+  if (this._rawNode) {
+    this._rawNode.disconnect();
+  }
+
   this._rawNode = this._context.createBufferSource();
   this._rawNode.buffer = this._context.createBuffer(arrayBuffer, true);
+
+  this._rawNode.connect(dest);
+  this._rawNode.noteOn(0);
 };
 
 module.exports = SoundNode;

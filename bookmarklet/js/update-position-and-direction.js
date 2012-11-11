@@ -4,7 +4,19 @@ var transformCar = require('./dude/car').transformCar;
 
 var PIXELS_PER_METER = 200;
 
-module.exports = function updatePositionAndDirection(obj, dude) {
+module.exports = {
+  updatePositionAndDirection:updatePositionAndDirection,
+  updatePositionAndDirections:updatePositionAndDirections
+};
+
+function updatePositionAndDirections(objs, dude) {
+  //TODO think about how to apply this function fancily 
+  objs.map(function(obj){
+    updatePositionAndDirection(obj, dude);
+  });
+}
+
+function updatePositionAndDirection(obj, dude) {
   // Convert to meters (very roughly).
   var x = (dude.pos.x - dude.origin.x) / PIXELS_PER_METER;
   var y = (dude.origin.y - dude.pos.y) / PIXELS_PER_METER;
