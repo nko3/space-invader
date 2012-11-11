@@ -9,7 +9,7 @@ function onError(err) {
 }
 
 // Sending data up
-socket.on('welcome', function (data) {
+socket.on('welcome', function () {
   navigator.webkitGetUserMedia({ audio: true }, onData, onError);
 
   function onData(stream) {
