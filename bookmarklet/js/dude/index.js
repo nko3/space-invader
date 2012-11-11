@@ -18,18 +18,27 @@ setTimeout(function () {
 
 }, 200);
 
+
+var haveCarIv;
 function registerBuyCar() {
   headpane.unregister('Sell your car');
   headpane.register('Buy a car', function (event) {
+    clearInterval(haveCarIv);
     registerSellCar();
     nko.me.updateCar({ hasCar: true });
     broadcast.exec('updateCar', { id: nko.me.id, hasCar: true });
+    // HACK: keep telling everyone about our car periodically since syncing on new join is not working
+    haveCarIv = setInverval(
+      function () {
+        broadcast.exec('updateCar', { id: nko.me.id, hasCar: true });
+      }, 3000);
   });
 }
 
 function registerSellCar() {
   headpane.unregister('Buy a car');
   headpane.register('Sell your car', function (event) {
+    clearInterval(haveCarIv);
     registerBuyCar();
     nko.me.updateCar({ hasCar: false });
     broadcast.exec('updateCar', { id: nko.me.id, hasCar: false });

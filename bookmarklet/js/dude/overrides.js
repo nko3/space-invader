@@ -15,7 +15,6 @@ function init (nko) {
 
   var OldDude = nko.Dude;
   nko.Dude = function (options) {
-    console.log('constructing', options);
     OldDude.apply(this, arguments);
     this.speed = options.speed;
     this.updateCar(options);
