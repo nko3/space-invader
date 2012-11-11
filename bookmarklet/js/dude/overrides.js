@@ -1,7 +1,7 @@
 var DEFAULT_SPEED = 200;
 var car = require('./car');
 var broadcast = require('./broadcast');
-var playMP3FromDude = require('./play-mp3');
+var playMP3FromDude = require('../microphone').playMP3FromDude;
 var context = require('../context');
 var config = require('../config');
 
