@@ -3,7 +3,7 @@ html.no-js
 head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-    title
+    title Sound Invaders
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width')
     link(rel='stylesheet', href='css/bootstrap.min.css')
@@ -14,6 +14,7 @@ head
       }
     link(rel='stylesheet', href='css/bootstrap-responsive.min.css')
     link(rel='stylesheet', href='css/main.css')
+    link(rel='icon', type='image/x-icon', href='img/favicon.ico')
     script(src='vendor-js/vendor/modernizr-2.6.1-respond-1.1.0.min.js')
   body
     //if lt IE 7
@@ -32,29 +33,47 @@ head
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href='#') Sound Invader
+          a.brand(href='#') Sound Invaders
           .nav-collapse.collapse
             ul.nav
               li.active
                 a(href='#') Home
-              li
-                a(href='#about') About
     .container
       .hero-unit
-        h1 Sound Invader
+        img(src='/img/sound-invader.png', id='sound-invader')
+        h1 Sound Invaders
+
+        h2 What have we here?
+        p With our bookmarklet you can experience the NKO 2012 website in a whole new way.
+        ul
+          li Speak to other players using your microphone!
+          li Hear other players around you in a simulated spatialized audio environment!!
+          li Type and generate speech sound that gets sent to all clients!!!
+          li Click on your dude to Buy a Car and zip around
+        
+        h2 How to Use:
+        h3 Drag the Bookmarklet below to your Bookmarks Bar
         p
-          | FIXME WE NEED COPY
-        p
-          a.btn.btn-primary.btn-large(href="#{bookmarkletSource}") Drag Bookmarklet To Bookmarksbar
+          a.btn.btn-primary.btn-large(href="#{bookmarkletSource}") Sound Invader
             span.icon-arrow-up
-        p
-          h3 Set Chrome Flags
-          p
-            span Type the following into your chrome's address bar:
-            pre chrome://flags
-            p Find this section:
-            img(src="img/enable-flags.png")
-            p Click Enable
+        h3 Set Yo' Chrome Flags
+        ol
+          li Type the following into your chrome's address bar:
+          pre chrome://flags
+          li Find this section:
+          img(src="img/enable-flags.png")
+          li Click Enable
+          li Relaunch Chrome
+          li GO TO 
+            a(href="http://nodeknockout.com", target="_blank") NODEKNOCKOUT.COM
+        h3 Plug in Those Headphones!!!
+        ul
+          li Headphones are important to fully experience the simulated audio environment we've created.  
+          li Move around and hear other players' voices move and attenuate around you!!
+          li HINT: Hold down CTRL while speaking into your microphone
+
+        h2 GO PLAY! HAVE FUN!
+        h2 VOTE FOR US BABYYY!!
 
       //
          Example row of columns 
