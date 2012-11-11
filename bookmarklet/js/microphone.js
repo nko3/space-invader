@@ -41,21 +41,29 @@ socket.on('welcome', function (data) {
   }
 });
 
-// Receiving data
 var context = new window.webkitAudioContext();
+var destAudioBuffer = context.createBuffer(1, 2048 * 8 * 10, 44100);
+var destFloat32Array = destAudioBuffer.getChannelData(0);
+var currentPos = 0;
+
+// Receiving data
 socket.on('sound', function (data) {
-  var destAudioBuffer = context.createBuffer(1, data.length, data.sampleRate);
-  var destFloat32Array = destAudioBuffer.getChannelData(0);
+//  var destAudioBuffer = context.createBuffer(1, data.length, data.sampleRate);
+//  var destFloat32Array = destAudioBuffer.getChannelData(0);
   var sourceFloat32Array = data.channel0;
 
   for (var i = 0; i < data.length; ++i) {
-      destFloat32Array[i] = sourceFloat32Array[i];
+      destFloat32Array[currentPos++] = sourceFloat32Array[i];
   }
 
-  console.log("destFloat32Array", destFloat32Array);
+//  console.log("destFloat32Array", destFloat32Array);
 
-  var sourceNode = context.createBufferSource();
-  sourceNode.buffer = destAudioBuffer;
-  sourceNode.connect(context.destination);
-  sourceNode.noteOn(0);
+  console.log("up to ", currentPos);
+  if (currentPos === destFloat32Array.length) {
+    console.log("playing");
+    var sourceNode = context.createBufferSource();
+    sourceNode.buffer = destAudioBuffer;
+    sourceNode.connect(context.destination);
+    sourceNode.noteOn(0);
+  }
 });
