@@ -1,17 +1,22 @@
 'use strict';
-var $pane = $('<ul>');
-$pane.css({
-  marginLeft :  '65px',
-  background :  'antiquewhite',
-  border     :  '2px solid black',
-  padding    :  '2px',
-  cursor     :  'pointer',
-  display    :  'none',
-  width      :  '150px',
-  fontSize   :  '8px'
-});
+var dudeOverrides = require('./dude-overrides');
+var car = require('./car');
 
-setTimeout(function () {
+var $pane = $('<ul>').addClass('dude-pane');
+
+$pane
+  .css({
+    marginLeft :  '65px',
+    background :  'antiquewhite',
+    border     :  '2px solid black',
+    padding    :  '2px',
+    cursor     :  'pointer',
+    display    :  'none',
+    width      :  '150px',
+    fontSize   :  '8px'
+  });
+
+function initPane() {
   var me = nko.me;
   console.log('me', me);
   me.div.on('click', function (event) {
@@ -22,6 +27,12 @@ setTimeout(function () {
   });
 
   $pane.appendTo(me.div);
+}
+
+setTimeout(function () {
+  initPane();
+  dudeOverrides.customizeGoto(nko);
+  car.initCar(nko.div);
 }, 200);
 
 function register(item, onselected) {
