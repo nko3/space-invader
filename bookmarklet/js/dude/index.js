@@ -2,6 +2,7 @@
 var headpane      =  require('./headpane');
 var dudeOverrides =  require('./overrides');
 var car           =  require('./car');
+var broadcast     =  require('./broadcast');
 var me;
 
 setTimeout(function () {
@@ -13,7 +14,6 @@ setTimeout(function () {
   car.init(me);
   registerBuyCar();
 
-
 }, 200);
 
 function registerBuyCar() {
@@ -22,6 +22,7 @@ function registerBuyCar() {
     registerSellCar();
     dudeOverrides.setGotoSpeed(1000);
     me.showCar();
+    broadcast.exec('showCar', me.id);
   });
 }
 
@@ -31,6 +32,11 @@ function registerSellCar() {
     registerBuyCar();
     dudeOverrides.setGotoSpeed(200);
     me.hideCar();
+    broadcast.exec('hideCar', me.id);
   });
 }
+
+socket.on('exec', function (data) {
+  console.log('executing', data.method);
+});
 
