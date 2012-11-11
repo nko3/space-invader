@@ -22,8 +22,8 @@ function registerBuyCar() {
   headpane.unregister('Sell your car');
   headpane.register('Buy a car', function (event) {
     registerSellCar();
-    me.showCar();
-    broadcast.exec('showCar', { id: me.id });
+    nko.me.hasCar = true;
+    nko.me.updateCar();
   });
 }
 
@@ -31,8 +31,8 @@ function registerSellCar() {
   headpane.unregister('Buy a car');
   headpane.register('Sell your car', function (event) {
     registerBuyCar();
-    me.hideCar();
-    broadcast.exec('hideCar', { id: me.id });
+    nko.me.hasCar = false;
+    nko.me.updateCar();
   });
 }
 
