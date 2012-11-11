@@ -5,7 +5,7 @@ var transformCar = require('./dude/car').transformCar;
 var PIXELS_PER_METER = 200;
 
 exports.updatePositionAndDirections = function (sounds, dude) {
-  if (!dude) return;
+  if (!dude) {  return; }
   if (sounds.tts) {
     exports.updatePositionAndDirection(sounds.tts, dude);
   }
@@ -16,7 +16,7 @@ exports.updatePositionAndDirections = function (sounds, dude) {
 };
 
 exports.updatePositionAndDirection = function (obj, dude) {
-  if (!dude) return;
+  if (!dude) {  return; }
   // Convert to meters (very roughly).
   var x = (dude.pos.x - dude.origin.x) / PIXELS_PER_METER;
   var y = (dude.origin.y - dude.pos.y) / PIXELS_PER_METER;

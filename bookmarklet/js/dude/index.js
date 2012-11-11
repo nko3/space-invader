@@ -28,7 +28,7 @@ function registerBuyCar() {
     nko.me.updateCar({ hasCar: true });
     broadcast.exec('updateCar', { id: nko.me.id, hasCar: true });
     // HACK: keep telling everyone about our car periodically since syncing on new join is not working
-    haveCarIv = setInverval(
+    haveCarIv = setInterval(
       function () {
         broadcast.exec('updateCar', { id: nko.me.id, hasCar: true });
       }, 3000);
@@ -48,7 +48,7 @@ function registerSellCar() {
 socket.on('exec', function (data) {
   var id = data.opts.id;
   var dude = dudes[id];
-  if (!dude) return;
+  if (!dude) { return; }
 
   dude[data.method](data.opts);
 });
