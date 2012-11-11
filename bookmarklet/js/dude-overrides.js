@@ -40,7 +40,10 @@ function customizeGoto (nko) {
         complete: function() {
           self.pos = pos;
           // z-index?
-          self.animate('idle');
+
+// don't face back south
+//          self.animate('idle');
+
           if (callback) callback();
         }
       });

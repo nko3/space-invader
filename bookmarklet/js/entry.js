@@ -1,6 +1,3 @@
-var duckpuncher = require('./duckpuncher');
-duckpuncher.duckpunch();
-
 require('./microphone');
 require('./dude');
 
