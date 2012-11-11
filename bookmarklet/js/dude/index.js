@@ -1,12 +1,12 @@
 'use strict';
-var headpane      =  require('./dude/headpane');
-var dudeOverrides =  require('./dude/dude-overrides');
-var car           =  require('./dude/car');
+var headpane      =  require('./headpane');
+var dudeOverrides =  require('./overrides');
+var car           =  require('./car');
 
 setTimeout(function () {
 
   dudeOverrides.init(nko);
-  
+
   headpane.init(nko.me);
   car.init(nko.me);
 
