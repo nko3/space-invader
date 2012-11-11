@@ -1,6 +1,6 @@
 {
   "name": "nko3-space-invader",
-  "version": "0.0.0-12",
+  "version": "0.0.0-13",
   "description": "👾",
   "main": "server.js",
   "scripts": {
@@ -25,5 +25,5 @@
   "engines": {
     "node": "0.8.x"
   },
-  "subdomain": "space-invader.nko3"
+  "subdomain": "sound-invader.nko3"
 }
