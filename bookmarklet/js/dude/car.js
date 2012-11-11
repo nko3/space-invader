@@ -21,4 +21,15 @@ exports.giveCar = function (dude) {
 
   $car.appendTo($div);
   dude.car = $car;
-}
+};
+
+exports.transformCar = function ($car, direction) {
+  switch (direction) {
+    case 'e':
+      $car.css('transform', 'scaleX(-1)');
+      break;
+    case 'w':
+      $car.css('transform', '');
+      break;
+  }
+};

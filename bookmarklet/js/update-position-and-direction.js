@@ -1,5 +1,7 @@
 'use strict';
 
+var transformCar = require('./dude/car').transformCar;
+
 var PIXELS_PER_METER = 200;
 
 module.exports = function updatePositionAndDirection(obj, dude) {
@@ -15,5 +17,6 @@ module.exports = function updatePositionAndDirection(obj, dude) {
   obj.setPosition(x, y);
   obj.setDirection(direction);
   obj.setVelocity(velX, velY);
-  // TODO velocity!
+
+  transformCar(dude.car, direction);
 };
