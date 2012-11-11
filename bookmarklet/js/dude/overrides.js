@@ -47,6 +47,10 @@ function init (nko) {
 
     this.vel = delta.normalize().times(speed);
 
+    if (this.hasCar) {
+      playCarSoundForDude(this);
+    }
+
     this.animate(delta.cardinalDirection());
     if (duration && duration > 0)
       this.div.stop();
@@ -72,6 +76,10 @@ function init (nko) {
           self.pos = pos;
           self.vel = new nko.Vector(0, 0);
           if (callback) callback();
+
+          if (self.hasCar) {
+            stopCarSoundForDude(self);
+          }
         }
       });
   };
@@ -83,11 +91,9 @@ function init (nko) {
     if (this.hasCar) {
       this.speed = 1500;
       if(!this.car.is(':visible')) this.car.fadeIn(200);
-      playCarSoundForDude(this);
     } else {
       this.speed = 200;
       if(this.car.is(':visible')) this.car.fadeOut(200);
-      stopCarSoundForDude(this);
     }
   };
 
