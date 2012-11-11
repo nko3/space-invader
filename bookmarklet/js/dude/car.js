@@ -3,7 +3,7 @@ var $car;
 function init(me) {
   var $div = me.div;
 
-  var mtop = me.size.y - 25 + 40;
+  var mtop = me.size.y - 25 + 20;
   $car = $('<div>').addClass('dude-car');
   $car
     .css({ 
@@ -17,15 +17,19 @@ function init(me) {
     });
 
   $car.appendTo($div);
-  console.log('inited car');
+  me.car = $car;
 }
 
-function toggleCar() {
-  console.log('toggling car');
-  $car.toggle();
+function show() {
+  $car.fadeIn(200);
+}
+
+function hide() {
+  $car.fadeOut(200);
 }
 
 module.exports = {
   init : init,
-  toggleCar: toggleCar
+  show: show,
+  hide: hide
 }

@@ -9,10 +9,26 @@ setTimeout(function () {
 
   headpane.init(nko.me);
   car.init(nko.me);
+  registerBuyCar();
+
 
 }, 200);
 
-headpane.register('buy a car', function (event) {
-  dudeOverrides.setGotoSpeed(1000);
-  car.toggleCar();
-});
+function registerBuyCar() {
+  headpane.unregister('sell your car');
+  headpane.register('buy a car', function (event) {
+    registerSellCar();
+    dudeOverrides.setGotoSpeed(1000);
+    car.show();
+  });
+}
+
+function registerSellCar() {
+  headpane.unregister('buy a car');
+  headpane.register('sell your car', function (event) {
+    registerBuyCar();
+    dudeOverrides.setGotoSpeed(200);
+    car.hide();
+  });
+}
+

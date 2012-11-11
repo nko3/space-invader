@@ -24,11 +24,23 @@ function init(me) {
 
 function register(item, onselected) {
   var $li = $('<li>' + item + '</li>');
-  $li.on('click', function (event) { onselected(); return false; });
+  $li.on('click', function (event) { 
+    onselected(); 
+    $pane.hide(); 
+    return false; 
+  });
   $li.appendTo($pane);
 }
 
+function unregister(item) {
+  $pane
+    .find('li')
+    .filter(function (x) { return this.textContent === item; })
+    .remove();
+}
+
 module.exports = {
-  init: init,
-  register: register
+  init       :  init,
+  register   :  register,
+  unregister :  unregister
 }
