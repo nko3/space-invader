@@ -2,7 +2,7 @@
 
 var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
-var updatePositionAndDirection = require('./update-position-and-direction');
+var positioner = require('./update-position-and-direction');
 var socket = require('./socket');
 
 function onError(err) {
@@ -59,7 +59,7 @@ socket.on('sound', function (data) {
     return;
   }
 
-  updatePositionAndDirection(dps, dude);
+  positioner.updatePositionAndDirection(dps, dude);
 });
 
 
@@ -71,6 +71,23 @@ setInterval(function () {
     return;
   }
 
-  updatePositionAndDirection(context.listener, nko.me);
+  positioner.updatePositionAndDirection(context.listener, nko.me);
 }, 100);
 
+module.exports = {
+  playMP3FromDude:playMP3FromDude
+};
+
+function playMP3FromDude(url, dude){
+  context.createArrayBufferFromURL(url, function(err, buffer){
+    if (err) {
+      throw err;
+    } 
+    else {
+      //TODO don't overwrite the existing sound, but create array of sounds
+      var dps = dudePanningSounds[data.id] = context.createPanningSound();
+      dps.playArrayBuffer(buffer);
+      positioner.updatePositionAndDirections(dudePanningSounds, dude)
+    }
+  });
+}

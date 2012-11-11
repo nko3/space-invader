@@ -98,9 +98,10 @@ function init (nko) {
          .fadeIn();
 
         if (true || this === nko.me){
+          var microphone = require('../microphone');
           var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
           var localURL = config.path + 'mp3?url='+encodeURIComponent(originalURL);
-
+          microphone.playMP3FromDude(localURL, this);
         }
    }
   };  
