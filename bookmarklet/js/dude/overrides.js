@@ -55,8 +55,12 @@ function init (nko) {
       });
   };
 
-  nko.Dude.prototype.showCar = function () {}
-  nko.Dude.prototype.hideCar = function () {}
+  nko.Dude.prototype.showCar = function () {
+    if (this.car) this.car.fadeIn(200);
+  };
+  nko.Dude.prototype.hideCar = function () {
+    if (this.car) this.car.fadeOut(200);
+  };
 }
 
 module.exports = {

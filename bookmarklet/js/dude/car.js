@@ -20,16 +20,6 @@ function init(me) {
   me.car = $car;
 }
 
-function show() {
-  $car.fadeIn(200);
-}
-
-function hide() {
-  $car.fadeOut(200);
-}
-
 module.exports = {
-  init : init,
-  show: show,
-  hide: hide
+  init : init
 }

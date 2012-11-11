@@ -2,13 +2,15 @@
 var headpane      =  require('./headpane');
 var dudeOverrides =  require('./overrides');
 var car           =  require('./car');
+var me;
 
 setTimeout(function () {
 
+  me = nko.me;
   dudeOverrides.init(nko);
 
-  headpane.init(nko.me);
-  car.init(nko.me);
+  headpane.init(me);
+  car.init(me);
   registerBuyCar();
 
 
@@ -19,7 +21,7 @@ function registerBuyCar() {
   headpane.register('buy a car', function (event) {
     registerSellCar();
     dudeOverrides.setGotoSpeed(1000);
-    car.show();
+    me.showCar();
   });
 }
 
@@ -28,7 +30,7 @@ function registerSellCar() {
   headpane.register('sell your car', function (event) {
     registerBuyCar();
     dudeOverrides.setGotoSpeed(200);
-    car.hide();
+    me.hideCar();
   });
 }
 
