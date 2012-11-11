@@ -1,4 +1,5 @@
 'use strict';
+var config = require('../config');
 
 exports.giveCar = function (dude) {
   var $div = dude.div;
@@ -8,7 +9,7 @@ exports.giveCar = function (dude) {
   var $car = $('<div>').addClass('dude-car');
   $car
     .css({
-      backgroundImage: 'url(http://' + window.location.hostname + ':3000/img/car.png)',
+      backgroundImage: 'url(' + config.path + '/img/car.png)',
       backgroundRepeat: 'none',
       backgroundPosition: 'top',
       width: '128px',

@@ -1,6 +1,8 @@
 require('./microphone');
 require('./dude');
 
+var config = require('../config');
+
 // hide text on nodeko homepage
 $('#inner').fadeToggle();
 
@@ -10,7 +12,7 @@ $instr.css({
   position: 'absolute',
   left: '-290px',
   top: '10px',
-  background: 'url(http://' + window.location.hostname + ':3000/img/bubble.png)',
+  background: 'url(' + config.path + '/img/bubble.png)',
   backgroundSize: '100% 100%',
   width: '270px',
   minHeight: '220px',
@@ -40,7 +42,7 @@ $invader.css({
   width: '100px',
   height: '100px',
   cursor: 'pointer',
-  background: 'url(http://' + window.location.hostname + ':3000/img/space-invader.png)'
+  background: 'url(' + config.path + '/img/space-invader.png)',
 });
 
 $invader.appendTo($instr);
