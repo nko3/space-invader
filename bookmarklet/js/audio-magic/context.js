@@ -1,6 +1,6 @@
 'use strict';
 
-var PannerNode = require('./panner-node');
+var PanningSound = require('./panning-sound');
 var Listener = require('./listener');
 
 function createAudioContext() {
@@ -14,14 +14,13 @@ function createAudioContext() {
 }
 
 function Context() {
-  this.audioContext = createAudioContext();
+  this._audioContext = createAudioContext();
 
-  var listenerOptions = { position: [0, 0, 0], angle: 0 };
-  this.listener = new Listener(this.audioContext, listenerOptions);
+  this.listener = new Listener(this._audioContext);
 }
 
-Context.prototype.createPannerNode = function (options) {
-  return new PannerNode(this.audioContext, options);
+Context.prototype.createPanningSound = function () {
+  return new PanningSound(this._audioContext);
 };
 
 module.exports = Context;
