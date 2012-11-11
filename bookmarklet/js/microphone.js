@@ -68,7 +68,7 @@ setInterval(function () {
 }, 100);
 
 exports.playMP3FromDude = function playMP3FromDude(url, dude) {
-  context.createArrayBufferFromURL(url, function (err, buffer) {
+  context.createAudioBufferFromURL(url, function (err, buffer) {
     if (err) {
       throw err;
     }
@@ -80,7 +80,7 @@ exports.playMP3FromDude = function playMP3FromDude(url, dude) {
       var ds = dudeSounds[dude.id];
       ds.tts = context.createPanningSound();
 
-      ds.tts.playArrayBuffer(buffer);
+      ds.tts.playAudioBuffer(buffer);
     }
   });
 };

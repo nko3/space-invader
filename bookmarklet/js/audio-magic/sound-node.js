@@ -27,7 +27,7 @@ SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) 
   this._rawNode.noteOn(0);
 };
 
-SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest, options) {
+SoundNode.prototype.playAudioBuffer = function (audioBuffer, dest, options) {
   dest = dest || this._context.destination;
 
   if (this._rawNode) {
@@ -35,7 +35,7 @@ SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest, options) {
   }
 
   this._rawNode = this._context.createBufferSource();
-  this._rawNode.buffer = arrayBuffer;
+  this._rawNode.buffer = audioBuffer;
   this._rawNode.loop = !!(options && options.loop);
 
   this._rawNode.connect(dest);

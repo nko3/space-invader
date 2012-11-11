@@ -23,7 +23,7 @@ Context.prototype.createPanningSound = function () {
   return new PanningSound(this._audioContext);
 };
 
-Context.prototype.createArrayBufferFromURL = function (url, cb) {
+Context.prototype.createAudioBufferFromURL = function (url, cb) {
   var request = new XMLHttpRequest();
   request.open('GET', url, true);
   request.responseType = 'arraybuffer';
@@ -32,8 +32,8 @@ Context.prototype.createArrayBufferFromURL = function (url, cb) {
   request.onload = function () {
     this._audioContext.decodeAudioData(
       request.response,
-      function (arrayBuffer) {
-        cb(null, arrayBuffer);
+      function (audioBuffer) {
+        cb(null, audioBuffer);
       },
       function (err) {
         cb(err, null);

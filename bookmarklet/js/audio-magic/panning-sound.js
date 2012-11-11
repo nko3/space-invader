@@ -14,8 +14,8 @@ PanningSound.prototype.playRawData = function (length, sampleRate, channel0) {
   this._soundNode.playRawData(length, sampleRate, channel0, this._pannerNode._rawNode);
 };
 
-PanningSound.prototype.playArrayBuffer = function (arrayBuffer, options) {
-  this._soundNode.playArrayBuffer(arrayBuffer, this._pannerNode._rawNode, options);
+PanningSound.prototype.playAudioBuffer = function (audioBuffer, options) {
+  this._soundNode.playAudioBuffer(audioBuffer, this._pannerNode._rawNode, options);
 };
 
 PanningSound.prototype.setPosition = function (x, y) {
