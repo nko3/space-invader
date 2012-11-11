@@ -1,19 +1,18 @@
-"use strict";
+'use strict';
 
-var angleToVector = require("./helpers").angleToVector;
+var angleToVector = require('./helpers').angleToVector;
 
-function Listener(context, options) {
-  this.context = context;
-  this.position = options.position;
-  this.angle = options.angle;
+function Listener(context) {
+  this._context = context;
 
-  this.setPosition(this.position);
-  this.setOrientation(this.angle);
+  this.position = null;
+  this.angle = null;
 }
 
-Listener.prototype.setPosition = function (pos) {
+Listener.prototype.setPosition = function (x, y) {
   this.position = pos;
-  this.context.listener.setPosition(pos[0], pos[1], pos[2]);
+
+  this._context.listener.setPosition(x, y, 0);
 };
 
 Listener.prototype.setOrientation = function (angle) {
@@ -21,7 +20,7 @@ Listener.prototype.setOrientation = function (angle) {
 
   var frontVector = angleToVector(angle);
   var upVector = [0, 0, 1];
-  this.context.listener.setOrientation(
+  this._context.listener.setOrientation(
     frontVector[0], frontVector[1], frontVector[2],
     upVector[0], upVector[1], upVector[2]
   );

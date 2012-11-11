@@ -1,5 +1,21 @@
 "use strict";
 
+////// SAMPLE USAGE OF NEW API
+
+var Context = require('./context');
+
+var context = new Context();
+
+context.listener.setPosition(x, y);
+context.listener.setOrientation(Math.PI / 2);
+
+var ps1 = context.createPanningSound();
+ps1.setPosition(x1, y1);
+ps1.setOrientation(Math.PI);
+ps1.play(audioDataThatYouWouldPassToCreateBuffer);
+
+//////////
+
 var context,
     players,
     soundNodes,
@@ -163,71 +179,6 @@ function Sound(options) {
 }
 
 //////////
-
-function PanningSound(options) {
-  this.options = options;
-  this.position = options.position;
-
-  this.beep = function() { /* do nothing for now */ };
-
-  this.pannerNode = new PannerNode(options);
-  this.volumeNode = createVolumeNode(options.gain);
-  this.convolverNode = createConvolverNode(options.IRPath, function(audioData) {
-    this.convolverNode.buffer = context.createBuffer(audioData, false);
-  }.bind(this));
-
-  this.soundNode = new SoundNode(options, function onSoundLoaded() {
-    this.soundNode.rawNode.connect(this.convolverNode);
-    this.convolverNode.connect(this.volumeNode);
-    this.volumeNode.connect(this.pannerNode.rawNode);
-    this.pannerNode.rawNode.connect(context.destination);
-
-    this.beep = function() {
-      this.soundNode.rawNode.noteOn(context.currentTime);
-
-      var soundLengthMs = this.soundNode.rawNode.buffer.duration * 1000;
-      setTimeout(function() {
-        this.soundNode.reset(function() {
-          this.soundNode.rawNode.connect(this.convolverNode);
-        }.bind(this));
-      }.bind(this), soundLengthMs);
-    }
-
-    if (options.autoplay) {
-      this.soundNode.rawNode.noteOn(context.currentTime);
-    }
-  }.bind(this));
-}
-
-PanningSound.prototype.setPosition = function(pos) {
-  this.position = pos;
-
-  // RESET panner node
-  this.pannerNode.rawNode.disconnect();
-  this.options.position = this.position;
-  this.pannerNode = new PannerNode(this.options);
-
-  this.convolverNode.connect(this.pannerNode.rawNode);
-  this.pannerNode.rawNode.connect(this.volumeNode);
-  this.pannerNode.rawNode.connect(context.destination);
-}
-
-
-// ADDITIONAL NODE FACTORIES
-
-function createConvolverNode(path, onConvolverLoaded) {
-  var convolver = context.createConvolver();
-  var request = new XMLHttpRequest();
-  request.open("GET", "sounds/ir/church.m4a", true);
-  request.responseType = "arraybuffer";
-
-  request.onload = function () {
-    onConvolverLoaded(request.response);
-  }
-  request.send();
-
-  return convolver;
-}
 
 // HELPERS
 

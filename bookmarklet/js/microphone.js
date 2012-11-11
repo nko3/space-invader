@@ -1,3 +1,5 @@
+'use strict';
+
 var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
 var socket = io.connect('http://' + window.location.hostname + ':3000');
@@ -18,8 +20,19 @@ socket.on('welcome', function (data) {
 
   function processData(data) {
     if (ctrlKeyIsDown()) {
-      console.log('sending sound to the server');
-      socket.emit('sound', { buffer: data, id: nko.me.id });
+      var me = nko.me;
+      var msg = { 
+        buffer: data,
+          dude: {
+            id: me.id,
+            name: me.name,
+            pos: me.pos,
+            size: me.size
+          }
+        };
+
+      console.log('sending msg to the server', msg);
+      socket.emit('sound', msg);
     }
   }
 });
