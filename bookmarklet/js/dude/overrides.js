@@ -51,9 +51,11 @@ function init (nko) {
 
   nko.Dude.prototype.showCar = function () {
     if (this.car) this.car.fadeIn(200);
+    this.speed = 1000;
   };
   nko.Dude.prototype.hideCar = function () {
     if (this.car) this.car.fadeOut(200);
+    this.speed = 200;
   };
 }
 
