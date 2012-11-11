@@ -18,5 +18,7 @@ module.exports = function updatePositionAndDirection(obj, dude) {
   obj.setDirection(direction);
   obj.setVelocity(velX, velY);
 
-  transformCar(dude.car, direction);
+  if (dude.car) {
+    transformCar(dude.car, direction);
+  }
 };
