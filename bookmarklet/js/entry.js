@@ -26,9 +26,11 @@ instrText = [
   '<li>Press [CTRL] to talk into your microphone</li>',
   '<li>Walk around to hear everyone moving around you</li>',
   '<li>Click on yourself to get a car</li>',
+  '<li>Click on me to hide these instructions</li>',
   '</ol>'
 ];
 $instr.html(instrText.join(''));
+$instr.prependTo($('#page'));
 
 $invader = $('<div/>');
 $invader.css({
@@ -39,6 +41,6 @@ $invader.css({
   height: '100px',
   background: 'url(http://' + window.location.hostname + ':3000/img/space-invader.png)'
 });
-$invader.appendTo($instr);
 
-$instr.prependTo($('#page'));
+$invader.appendTo($instr);
+$invader.on('click', function () { $instr.fadeOut(200); })
