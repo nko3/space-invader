@@ -14,7 +14,6 @@ setTimeout(function () {
   dudeOverrides.init(nko);
 
   headpane.init(me);
-  car.init(me);
   registerBuyCar();
 
 }, 200);
