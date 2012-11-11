@@ -32,7 +32,7 @@ function initPane() {
 setTimeout(function () {
   initPane();
   dudeOverrides.customizeGoto(nko);
-  car.initCar(nko.div);
+  car.initCar(nko.me);
 }, 200);
 
 function register(item, onselected) {
