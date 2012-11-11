@@ -2,6 +2,7 @@ var DEFAULT_SPEED = 200;
 var car = require('./car');
 var broadcast = require('./broadcast');
 var playMP3FromDude = require('../microphone').playMP3FromDude;
+var debounced = _.debounce(playMP3FromDude, 1000);
 var context = require('../context');
 var config = require('../config');
 
@@ -98,11 +99,10 @@ function init (nko) {
          .scrollTop(this.bubble.prop("scrollHeight"))
          .fadeIn();
 
-        if (true || this === nko.me){
+        if (this === nko.me){
           var microphone = require('../microphone');
           var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
           var localURL = config.path + 'mp3?url='+encodeURIComponent(originalURL);
-          var debounced = _.debounce(playMP3FromDude, 500);
           debounced(localURL, this);
         }
    }
