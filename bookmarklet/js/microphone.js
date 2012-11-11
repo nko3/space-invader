@@ -10,8 +10,6 @@ function onError(err) {
 
 // Sending data up
 socket.on('welcome', function (data) {
-  console.log('welcome', data);
-
   navigator.webkitGetUserMedia({ audio: true }, onData, onError);
 
   function onData(stream) {
@@ -21,7 +19,6 @@ socket.on('welcome', function (data) {
   function processData(audioBuffer) {
     if (ctrlKeyIsDown()) {
       var me = nko.me;
-      console.log(data);
       var msg = {
         sampleRate: audioBuffer.sampleRate,
         length: audioBuffer.length,
@@ -35,7 +32,6 @@ socket.on('welcome', function (data) {
           }
         };
 
-//      console.log('sending msg to the server', msg);
       socket.emit('sound', msg);
     }
   }
