@@ -1,7 +1,7 @@
 'use strict';
-var headpane      =  require('./headpane');
-var dudeOverrides =  require('./dude-overrides');
-var car           =  require('./car');
+var headpane      =  require('./dude/headpane');
+var dudeOverrides =  require('./dude/dude-overrides');
+var car           =  require('./dude/car');
 
 setTimeout(function () {
 

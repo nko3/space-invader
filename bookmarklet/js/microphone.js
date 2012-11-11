@@ -2,7 +2,7 @@
 
 var microphoneData = require('./microphone-data');
 var ctrlKeyIsDown = require('./ctrl-key-is-down');
-var socket = io.connect('http://' + window.location.hostname + ':3000');
+var socket = require('./socket');
 
 function onError(err) {
   throw err;

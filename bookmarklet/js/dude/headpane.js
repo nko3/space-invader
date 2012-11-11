@@ -26,8 +26,6 @@ function register(item, onselected) {
   var $li = $('<li>' + item + '</li>');
   $li.on('click', function (event) { onselected(); return false; });
   $li.appendTo($pane);
-  console.log('registering', item);
-  console.log($pane);
 }
 
 module.exports = {
