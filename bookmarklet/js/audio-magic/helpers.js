@@ -1,5 +1,17 @@
 "use strict";
 
+exports.directionToVector = function(dir) {
+  switch (dir) {
+    case "n":
+      return [0, 1, 0];
+    case "s":
+      return [0, -1, 0];
+    case "w":
+      return [-1, 0, 0];
+    case "e":
+      return [1, 0, 0];
+  }
+}
 
 exports.angleToVector = function (angle) {
   var vector = [0, 1, 0];
