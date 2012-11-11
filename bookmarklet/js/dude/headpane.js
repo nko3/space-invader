@@ -33,6 +33,13 @@ function register(item, onselected) {
     $pane.hide(); 
     return false; 
   });
+
+  $li.hover(function() {
+    $(this).css('color', 'blue');
+  }, function() {
+    $(this).css('color', 'black');
+  });
+
   $li.appendTo($pane);
 }
 
