@@ -16,6 +16,6 @@ io.sockets.on('connection', function (socket) {
   socket.emit('welcome', { user: count++ });
   socket.on('sound', function (data) {
     socket.broadcast.emit('sound', data);
-    console.log('data from: %s, length: %s', data.id, data.buffer.length);
+    console.log('data from: %s, length: %s', data.dude.id, data.buffer.length);
   });
 });
