@@ -17,7 +17,8 @@
     "socket.io": "~0.9.11",
     "vows": "~0.6.4",
     "bookmarkletify": "0.0.1",
-    "jade": ">= 0.0.1"
+    "jade": ">= 0.0.1",
+    "express": "~3.0.2"
   },
   "engines": {
     "node": "0.8.x"
