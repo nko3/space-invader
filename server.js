@@ -43,7 +43,6 @@ io.sockets.on('connection', function (socket) {
   socket.emit('welcome', { user: count++ });
   socket.on('sound', function (data) {
     socket.broadcast.emit('sound', data);
-    console.log('data from: %s, length: %s', data.dude.id, data.channel0.length);
   });
   socket.on('exec', function (data) {
     socket.broadcast.emit('exec', data);
