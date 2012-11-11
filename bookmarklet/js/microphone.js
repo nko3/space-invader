@@ -44,11 +44,13 @@ var dudePanningSounds = {};
 // Receiving data
 socket.on('sound', function (data) {
   if (!dudePanningSounds[data.id]) {
-    dudePanningSounds[data.id] = context.createPanningSound();
+    var panningSound = context.createPanningSound();
+    dudePanningSounds[data.id] = {};
+    dudePanningSounds[data.id].panning = panningSound;
   }
 
   var dps = dudePanningSounds[data.id];
-  dps.playRawData(data.length, data.sampleRate, data.channel0);
+  dp.panning.playRawData(data.length, data.sampleRate, data.channel0);
   //console.log(dudePanningSounds);
 
   var dude = nko.dudes[data.id];
@@ -56,7 +58,7 @@ socket.on('sound', function (data) {
     return;
   }
 
-  positioner.updatePositionAndDirection(dps, dude);
+  positioner.updatePositionAndDirections(dps, dude);
 });
 
 
@@ -68,12 +70,25 @@ setInterval(function () {
     return;
   }
 
-  positioner.updatePositionAndDirections([context.listener], nko.me);
+  positioner.updatePositionAndDirection(context.listener, nko.me);
 
-  Object.keys(nko.dudes).forEach(function (id) {
-    var dude = nko.dudes[id];
-    var soundsForDude = dudePanningSounds[id];
-
-    positioner.updatePositionAndDirections(soundsForDude, dude);
-  });
 }, 100);
+
+module.exports = {
+  playMP3FromDude:playMP3FromDude
+};
+
+function playMP3FromDude(url, dude){
+  context.createArrayBufferFromURL(url, function(err, buffer){
+    if (err) {
+      throw err;
+    } 
+    else {
+      dudePanningSounds[dude.id] = {};
+      dudePanningSounds[dude.id].tts = context.createPanningSound();
+
+      dudePanningSounds[dude.id].tts.playArrayBuffer(buffer);
+      positioner.updatePositionAndDirections(dudePanningSounds, dude)
+    }
+  });
+}

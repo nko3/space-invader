@@ -9,11 +9,14 @@ module.exports = {
   updatePositionAndDirections:updatePositionAndDirections
 };
 
-function updatePositionAndDirections(objs, dude) {
-  //TODO think about how to apply this function fancily 
-  objs.map(function(obj){
-    updatePositionAndDirection(obj, dude);
-  });
+function updatePositionAndDirections(sounds, dude) {
+  if(sounds.tts) {
+      updatePositionAndDirection(sounds.tts, dude);
+  }
+
+  if(sounds.panning) {
+      updatePositionAndDirection(sounds.panning, dude); 
+  }
 }
 
 function updatePositionAndDirection(obj, dude) {
