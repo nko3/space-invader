@@ -12,9 +12,9 @@ function PanningSound(context) {
   this._soundNode = new SoundNode(context);
 }
 
-PanningSound.prototype.play = function (audioData) {
+PanningSound.prototype.play = function (length, sampleRate, channel0) {
   this._pannerNode._rawNode.connect(this._context.destination);
-  this._soundNode.playTo(audioData, this._pannerNode._rawNode);
+  this._soundNode.play(length, sampleRate, channel0, this._pannerNode._rawNode);
 };
 
 PanningSound.prototype.setPosition = function (x, y) {
@@ -26,6 +26,8 @@ PanningSound.prototype.setOrientation = function (angle) {
   this.angle = angle;
   this._pannerNode.setOrientation(angle);
 };
+
+module.exports = PanningSound;
 
 /*  // RESET panner node; this compensates for a glitch (we think)
   this._pannerNode._rawNode.disconnect();

@@ -25,3 +25,5 @@ Listener.prototype.setOrientation = function (angle) {
     upVector[0], upVector[1], upVector[2]
   );
 };
+
+module.exports = Listener;

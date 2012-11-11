@@ -37,7 +37,7 @@ socket.on('welcome', function (data) {
   }
 });
 
-var Context = require('./context');
+var Context = require('./audio-magic/context');
 
 var context = new Context();
 var ps = context.createPanningSound();

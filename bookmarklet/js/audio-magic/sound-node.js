@@ -8,7 +8,7 @@ function SoundNode(context) {
 SoundNode.prototype.play = function (length, sampleRate, channel0, dest) {
   dest = dest || this._context.destination;
 
-  var destAudioBuffer = context.createBuffer(1, length, sampleRate);
+  var destAudioBuffer = this._context.createBuffer(1, length, sampleRate);
   var destFloat32Array = destAudioBuffer.getChannelData(0);
   var sourceFloat32Array = channel0;
 
@@ -22,3 +22,5 @@ SoundNode.prototype.play = function (length, sampleRate, channel0, dest) {
   this._rawNode.connect(dest);
   this._rawNode.noteOn(0);
 };
+
+module.exports = SoundNode;
