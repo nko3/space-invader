@@ -27,7 +27,8 @@ function init(me) {
 }
 
 function register(item, onselected) {
-  var $li = $('<li>' + item + '</li>');
+  var $li = $('<li>' + item + '</li>').css({ background : '#DDD' });
+    
   $li.on('click', function (event) { 
     onselected(); 
     $pane.hide(); 
