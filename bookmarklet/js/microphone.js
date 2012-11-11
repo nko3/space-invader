@@ -43,11 +43,11 @@ var dudeSounds = Object.create(null);
 
 // Receiving data
 socket.on('sound', function (data) {
-  if (!dudeSounds[data.id]) {
-    dudeSounds[data.id] = {};
+  if (!dudeSounds[data.dude.id]) {
+    dudeSounds[data.dude.id] = {};
   }
 
-  var ds = dudeSounds[data.id];
+  var ds = dudeSounds[data.dude.id];
   ds.panning = context.createPanningSound();
   ds.panning.playRawData(data.length, data.sampleRate, data.channel0);
 });
