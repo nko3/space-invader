@@ -8,7 +8,25 @@ nko.Vector.prototype.normalize = function () {
 function init (nko) {
   nko.me.div.css('cursor', 'pointer');
 
-  nko.Dude.prototype.goTo = function (pos, duration, callback) {
+  var OldDude = nko.Dude;
+  nko.Dude = function (options) {
+    OldDude.apply(this, arguments);
+    this.speed = options.speed;
+    this.hasCar = options.hasCar;
+  };
+  nko.Dude.prototype = Object.create(OldDude.prototype);
+  nko.Dude.prototype.constructor = nko.Dude;
+
+  nko.Dude.prototype.toJSON = function () {
+    var json = OldDude.prototype.toJSON.call(this);
+    json.speed = this.speed;
+    json.hasCar = this.hasCar;
+
+    return json;
+  };
+
+  // Use `OldDude` so that it works on `nko.me` as well (which is already created).
+  OldDude.prototype.goTo = function (pos, duration, callback) {
     var speed = this.speed || DEFAULT_SPEED;
 
     pos = new nko.Vector(pos).minus(this.origin);
@@ -51,11 +69,11 @@ function init (nko) {
       });
   };
 
-  nko.Dude.prototype.showCar = function () {
+  OldDude.prototype.showCar = function () {
     if (this.car) this.car.fadeIn(200);
     this.speed = 1000;
   };
-  nko.Dude.prototype.hideCar = function () {
+  OldDude.prototype.hideCar = function () {
     if (this.car) this.car.fadeOut(200);
     this.speed = 200;
   };
