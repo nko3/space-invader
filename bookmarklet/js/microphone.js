@@ -79,18 +79,23 @@ setInterval(function () {
 }, 100);
 
 // Receiving mp3 data
-function speakFromMp3URL(url){
+function arrayBufferFromUrl(url, cb) {
   var request = new XMLHttpRequest();
   request.open('GET', url, true);
   request.responseType = 'arraybuffer';
 
   // Decode asynchronously
-  request.onload = function() {
-    console.log('request has loaded')
-    context._audioContext.decodeAudioData(request.response, function(buffer) {
-      console.log('buffer has data')
-    }, $.noop);
-  }
+  request.onload = function () {
+    context._audioContext.decodeAudioData(
+      request.response,
+      function (arrayBuffer) {
+        cb(null, arrayBuffer);
+      },
+      function (err) {
+        cb(err, null);
+      }
+    );
+  };
 
   request.send();
 }
