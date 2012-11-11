@@ -3,6 +3,7 @@ var headpane      =  require('./headpane');
 var dudeOverrides =  require('./overrides');
 var car           =  require('./car');
 var broadcast     =  require('./broadcast');
+var socket = require('../socket');
 var me;
 
 setTimeout(function () {
