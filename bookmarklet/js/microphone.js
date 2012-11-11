@@ -50,3 +50,12 @@ socket.on('sound', function (data) {
 
 //  ps.setPosition|setOrientation;
 });
+
+setInterval(function () {
+  var x = nko.me.pos.x - nko.me.origin.x;
+  var y = nko.me.pos.y - nko.me.origin.y;
+  var direction = nko.me.state;
+
+  context.listener.setPosition(x, y);
+  context.listener.setDirection(direction);
+}, 100);
