@@ -13,7 +13,7 @@ SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) 
   var sourceFloat32Array = channel0;
 
   for (var i = 0; i < sourceFloat32Array.length; ++i) {
-      destFloat32Array[i++] = sourceFloat32Array[i];
+    destFloat32Array[i++] = sourceFloat32Array[i];
   }
 
   if (this._rawNode) {
@@ -27,7 +27,7 @@ SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) 
   this._rawNode.noteOn(0);
 };
 
-SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest) {
+SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest, options) {
   dest = dest || this._context.destination;
 
   if (this._rawNode) {
@@ -36,6 +36,7 @@ SoundNode.prototype.playArrayBuffer = function (arrayBuffer, dest) {
 
   this._rawNode = this._context.createBufferSource();
   this._rawNode.buffer = arrayBuffer;
+  this._rawNode.loop = !!(options && options.loop);
 
   this._rawNode.connect(dest);
   this._rawNode.noteOn(0);
