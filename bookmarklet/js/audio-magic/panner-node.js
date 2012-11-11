@@ -1,28 +1,11 @@
 'use strict';
 
-var angleToVector = require('./helpers').angleToVector;
+var mixinDirectional = require('./helpers').mixinDirectional;
 
 function PannerNode(context) {
-  this._context = context;
-  this._rawNode = this._context.createPanner();
+  this._rawNode = context.createPanner();
 }
 
-PannerNode.prototype.setPosition = function (x, y) {
-  this._rawNode.setPosition(x, y, 0);
-};
-
-PannerNode.prototype.setOrientation = function (angle) {
-  // TODO deduplicate code here and in listener.js.
-  var frontVector = angleToVector(angle);
-  var upVector = [0, 0, 1];
-  this._rawNode.setOrientation(
-    frontVector[0], frontVector[1], frontVector[2],
-    upVector[0], upVector[1], upVector[2]
-  );
-};
-
-PannerNode.prototype.setVelocity = function(x, y) {
-  this._rawNode.setVelocity(x, y, 0);
-};
+mixinDirectional(PannerNode.prototype);
 
 module.exports = PannerNode;
