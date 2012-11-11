@@ -24,13 +24,13 @@ socket.on('welcome', function (data) {
         length: audioBuffer.length,
         duration: audioBuffer.duration,
         channel0: audioBuffer.getChannelData(0),
-          dude: {
-            id: me.id,
-            name: me.name,
-            pos: me.pos,
-            size: me.size
-          }
-        };
+        dude: {
+          id: me.id,
+          name: me.name,
+          pos: me.pos,
+          size: me.size
+        }
+      };
 
       socket.emit('sound', msg);
     }
@@ -40,15 +40,20 @@ socket.on('welcome', function (data) {
 var Context = require('./audio-magic/context');
 
 var context = new Context();
-var ps = context.createPanningSound();
 
-//context.listener.(setPosition|setOrientation);
+var dudePanningSounds = {};
 
 // Receiving data
 socket.on('sound', function (data) {
   ps.play(data.length, data.sampleRate, data.channel0);
 
-//  ps.setPosition|setOrientation;
+  dps = dudePanningSounds[data.id];
+  if (dps) {
+    dps.setPosition(data.pos.x, data.pos.y);
+  } else {
+    dudePanningSounds[data.id] = context.createPanningSound();
+  }
+  //console.log(dudePanningSounds);
 });
 
 setInterval(function () {
