@@ -99,7 +99,7 @@ function init (nko) {
          .scrollTop(this.bubble.prop("scrollHeight"))
          .fadeIn();
 
-        if (this === nko.me){
+        if (this !== nko.me){
           var microphone = require('../microphone');
           var originalURL = 'http://tts-api.com/tts.mp3?q='+encodeURIComponent(text);
           var localURL = config.path + 'mp3?url='+encodeURIComponent(originalURL);
