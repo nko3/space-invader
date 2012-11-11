@@ -1,5 +1,21 @@
 "use strict";
 
+////// SAMPLE USAGE OF NEW API
+
+var Context = require('./context');
+
+var context = new Context();
+
+context.listener.setPosition(x, y);
+context.listener.setOrientation(Math.PI / 2);
+
+var ps1 = context.createPanningSound();
+ps1.setPosition(x1, y1);
+ps1.setOrientation(Math.PI);
+ps1.play(audioDataThatYouWouldPassToCreateBuffer);
+
+//////////
+
 var context,
     players,
     soundNodes,
