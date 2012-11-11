@@ -7,7 +7,7 @@ module.exports = function create(stream, ondata) {
   }
 
   var microphone                 =  context.createMediaStreamSource(stream);
-  var scriptProcessor            =  context.createScriptProcessor(2048 * 8);
+  var scriptProcessor            =  context.createScriptProcessor(2048);
   scriptProcessor.onaudioprocess =  onaudioprocess;
 
   microphone.connect(scriptProcessor);
