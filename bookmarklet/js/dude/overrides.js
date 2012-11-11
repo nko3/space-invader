@@ -1,9 +1,4 @@
-var speed = 200;
-var me;
-
-function setGotoSpeed (speed_) {
-  me.overrides.speed = speed_;
-}
+var DEFAULT_SPEED = 200;
 
 nko.Vector.prototype.normalize = function () {
   var length = this.length();
@@ -11,10 +6,9 @@ nko.Vector.prototype.normalize = function () {
 };
 
 function init (nko) {
-  me = nko.me;
-  me.overrides = { speed: 200 };
+  nko.Dude.prototype.goTo = function (pos, duration, callback) {
+    var speed = this.speed || DEFAULT_SPEED;
 
-  nko.Dude.prototype.goTo = function(pos, duration, callback) {
     pos = new nko.Vector(pos).minus(this.origin);
 
     if (typeof(duration) === 'function')
@@ -22,7 +16,7 @@ function init (nko) {
 
     var self = this
       , delta = pos.minus(this.pos)
-      , duration = duration !== undefined && typeof(duration) !== 'function' ? duration : delta.length() / this.overrides.speed * 1000;
+      , duration = duration !== undefined && typeof(duration) !== 'function' ? duration : delta.length() / speed * 1000;
 
     this.vel = delta.normalize().times(speed);
 
@@ -63,7 +57,4 @@ function init (nko) {
   };
 }
 
-module.exports = {
-  init: init,
-  setGotoSpeed: setGotoSpeed
-}
+exports.init = init;
