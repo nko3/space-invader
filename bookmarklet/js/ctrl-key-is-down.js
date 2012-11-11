@@ -1,15 +1,15 @@
 "use strict";
 
-var ctrlKeyIsDown = false;
+var keyIsDown = false;
 $(window).on({
   'keydown': function (e) {
-    ctrlKeyIsDown = e.ctrlKey;
+    keyIsDown = e.ctrlKey || e.shiftKey;
   },
   'keyup': function (e) {
-    ctrlKeyIsDown = e.ctrlKey;
+    keyIsDown = e.ctrlKey || e.shiftKey;
   }
 });
 
 module.exports = function () {
-    return ctrlKeyIsDown;
+    return keyIsDown;
 };
