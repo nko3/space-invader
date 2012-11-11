@@ -1,12 +1,13 @@
 {
   "name": "nko3-space-invader",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "description": "👾",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "watch": "browserify -e bookmarklet/js/entry.js -o bookmarklet/js/output.js -w --debug",
-    "build-bookmarklet": "browserify --debug -e bookmarklet/js/entry.js -o bookmarklet/js/output.js"
+    "build-bookmarklet": "browserify --debug -e bookmarklet/js/entry.js -o bookmarklet/js/output.js",
+    "predeploy": "npm run build-bookmarklet"
   },
   "repository": {
     "type": "git",
