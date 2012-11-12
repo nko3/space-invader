@@ -10,8 +10,8 @@ function PanningSound(context) {
   this._soundNode = new SoundNode(context);
 }
 
-PanningSound.prototype.playRawData = function (length, sampleRate, channel0) {
-  this._soundNode.playRawData(length, sampleRate, channel0, this._pannerNode._rawNode);
+PanningSound.prototype.playRawData = function (length, sampleRate, channel0, gain) {
+  this._soundNode.playRawData(length, sampleRate, channel0, this._pannerNode._rawNode, gain);
 };
 
 PanningSound.prototype.playAudioBuffer = function (audioBuffer, options) {

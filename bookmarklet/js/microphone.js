@@ -50,7 +50,7 @@ socket.on('sound', function (data) {
 
   var ds = dudeSounds[data.dude.id];
   ds.panning = context.createPanningSound();
-  ds.panning.playRawData(data.length, data.sampleRate, data.channel0);
+  ds.panning.playRawData(data.length, data.sampleRate, data.channel0, 20);
 });
 
 setInterval(function () {

@@ -5,7 +5,7 @@ function SoundNode(context) {
   this._rawNode = null;
 }
 
-SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) {
+SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest, gain) {
   dest = dest || this._context.destination;
 
   var destAudioBuffer = this._context.createBuffer(1, length, sampleRate);
@@ -23,7 +23,16 @@ SoundNode.prototype.playRawData = function (length, sampleRate, channel0, dest) 
   this._rawNode = this._context.createBufferSource();
   this._rawNode.buffer = destAudioBuffer;
 
-  this._rawNode.connect(dest);
+  if (gain) {
+    var gainNode = this._context.createGain();
+    gainNode.gain.value = gain;
+    this._rawNode.connect(gainNode);
+    gainNode.connect(dest);
+  }
+  else {
+    this._rawNode.connect(dest);
+  }
+
   this._rawNode.noteOn(0);
 };
 
