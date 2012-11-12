@@ -6,12 +6,17 @@ var PIXELS_PER_METER = 200;
 
 exports.updatePositionAndDirections = function (sounds, dude) {
   if (!dude) {  return; }
+
   if (sounds.tts) {
     exports.updatePositionAndDirection(sounds.tts, dude);
   }
 
   if (sounds.panning) {
     exports.updatePositionAndDirection(sounds.panning, dude);
+  }
+
+  if (sounds.car) {
+    exports.updatePositionAndDirection(sounds.car, dude);
   }
 };
 
