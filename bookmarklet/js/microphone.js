@@ -61,6 +61,20 @@ setInterval(function () {
 
   positioner.updatePositionAndDirection(context.listener, nko.me);
 
+  positioner.updatePositionAndDirection(context.listener, nko.me);
+  var dsForMe = dudeSounds[nko.me.id];
+  if (dsForMe) {
+    if (dsForMe.car) {
+      positioner.updatePositionAndDirection(dsForMe.car, nko.me);
+    }
+    if (dsForMe.tts) {
+      positioner.updatePositionAndDirection(dsForMe.tts, nko.me);
+    }
+    if (dsForMe.panning) {
+      positioner.updatePositionAndDirection(dsForMe.panning, nko.me);
+    }
+  }
+
   Object.keys(dudeSounds).forEach(function (id) {
     var ds = dudeSounds[id];
     var dude = nko.dudes[id];
